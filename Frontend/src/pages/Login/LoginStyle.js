@@ -1,4 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native'
+
+const { width } = Dimensions.get('window')
+
 const cores = {
     vinho: '#460303',
     preto: '#000000',
@@ -9,54 +12,59 @@ const cores = {
     douradoBrilho: '#F2C94C',
     fundo: '#F7F6F4',
     bordaInput: '#E2E2E2',
-};
+}
+
+const LATERAL = Math.max(20, width * 0.06)
 
 export const styles = StyleSheet.create({
-    // Container
     container: {
         flex: 1,
         backgroundColor: cores.fundo,
-        paddingHorizontal: 24,
-        paddingTop: 60,
+        paddingHorizontal: LATERAL,
+        paddingTop: Platform.OS === 'ios' ? 20 : 30,
     },
 
-    // Topo
     topo: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+
     botaoVoltar: {
-        width: 26,
-        height: 26,
+        width: 32,
+        height: 32,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
     },
+
     iconeVoltar: {
         width: 22,
         height: 22,
     },
+
     titulo: {
         fontSize: 20,
-        fontFamily: 'Inter_400SemiBold',
+        fontFamily: 'Inter_600SemiBold',
         color: cores.vinho,
     },
 
-    // Estrelas
     grupoBrilhos: {
         width: 48,
         height: 48,
         marginTop: 14,
     },
 
-    // Formulário
     form: {
         marginTop: 70,
     },
+
     label: {
         fontSize: 14,
         fontFamily: 'Inter_600SemiBold',
         color: cores.preto,
         marginBottom: 8,
     },
+
     input: {
         backgroundColor: cores.branco,
         borderWidth: 1,
@@ -69,6 +77,7 @@ export const styles = StyleSheet.create({
         color: cores.preto,
         marginBottom: 24,
     },
+
     campoSenha: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -79,6 +88,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 16,
         marginBottom: 10,
     },
+
     inputSenha: {
         flex: 1,
         paddingVertical: 14,
@@ -86,6 +96,7 @@ export const styles = StyleSheet.create({
         fontFamily: 'Inter_400Regular',
         color: cores.preto,
     },
+
     iconeOlho: {
         width: 20,
         height: 20,
@@ -99,7 +110,6 @@ export const styles = StyleSheet.create({
         marginBottom: 40,
     },
 
-    // Botão Entrar
     botaoEntrar: {
         backgroundColor: cores.vinho,
         borderRadius: 14,
@@ -107,24 +117,26 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 45,
     },
+
     textoBotaoEntrar: {
         color: cores.branco,
         fontSize: 16,
         fontFamily: 'Inter_600SemiBold',
     },
 
-    // Divisor
     divisor: {
         flexDirection: 'row',
         alignItems: 'center',
         marginVertical: 18,
     },
+
     linhaDivisor: {
         flex: 1,
         height: 1,
         backgroundColor: cores.prata,
         opacity: 0.4,
     },
+
     textoOu: {
         marginHorizontal: 12,
         color: cores.prata,
@@ -132,7 +144,6 @@ export const styles = StyleSheet.create({
         fontFamily: 'Inter_400Regular',
     },
 
-    // Botão Entrar com Conta
     botaoGoogle: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -143,32 +154,35 @@ export const styles = StyleSheet.create({
         borderRadius: 14,
         paddingVertical: 14,
     },
+
     iconeGoogle: {
         width: 20,
         height: 20,
         marginRight: 10,
     },
+
     textoBotaoGoogle: {
         color: cores.preto,
         fontSize: 15,
         fontFamily: 'Inter_600SemiBold',
     },
 
-    // Rodapé
     rodapeCadastro: {
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 40,
         marginBottom: 20,
     },
+
     textoRodape: {
         fontSize: 14,
         fontFamily: 'Inter_400Regular',
         color: cores.preto,
     },
+
     linkCriarConta: {
         fontSize: 14,
         fontFamily: 'Inter_700Bold',
         color: cores.vinho,
     },
-});
+})
