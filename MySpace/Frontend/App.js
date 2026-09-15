@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import {
   useFonts,
@@ -13,8 +13,13 @@ import {
 import BoasVindas from './src/pages/BoasVindas/BoasVindas';
 import Login from './src/pages/Login/Login';
 import CriarConta from './src/pages/CriarConta/CriarConta';
+import Feed from './src/pages/Feed/Feed';
+import NovaPublicacao from './src/pages/NovaPublicacao/NovaPublicacao';
+import Footer from './src/components/Footer/Footer';
 
 export default function App() {
+  const [aba, setAba] = useState('Inicio');
+
   const [fontsCarregadas] = useFonts({
     BodoniModa_400Regular,
     BodoniModa_700Bold,
@@ -27,7 +32,13 @@ export default function App() {
     return <View style={{ flex: 1, backgroundColor: '#fff' }} />;
   }
 
-  return <BoasVindas />;
-  //return <Login />;
-  //return <CriarConta />;
+  return (
+    <View style={{ flex: 1 }}>
+      {aba === 'Inicio' && <Feed />}
+      {aba === 'Criar' && (
+        <NovaPublicacao onVoltar={() => setAba('Inicio')} />
+      )}
+      <Footer ativo={aba} onNavegar={setAba} />
+    </View>
+  );
 }
