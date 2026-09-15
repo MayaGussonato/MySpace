@@ -2,99 +2,97 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const { width } = Dimensions.get("window");
 
-const CONTENT_PADDING = width * 0.05;
-
 export const ACTIVE_COLOR = "#460303";
 
-const styles = StyleSheet.create({
+const CONTENT_PADDING = width * 0.05;
 
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f7f7f9",
+    width: "100%",
+    backgroundColor: "#FFFFFF",
   },
 
   scroll: {
     flex: 1,
+    width: "100%",
   },
 
   scrollContent: {
-    paddingBottom: 24,
+    paddingBottom: 20,
   },
 
-  // =========================
-  // HEADER
-  // =========================
-
   header: {
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: CONTENT_PADDING,
     paddingTop: 12,
-    paddingBottom: 8,
+    paddingBottom: 12,
   },
 
- headerButton: {
-  width: 32,
-  height: 32,
-  alignItems: "flex-start",
-  justifyContent: "center",
-  transform: [{ translateY: 3 }],
-},
+  headerButton: {
+    width: 40,
+    height: 40,
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
 
   headerSpace: {
-    width: 32,
+    width: 40,
   },
 
   title: {
-  fontSize: 18,
-  fontWeight: "700",
-  color: ACTIVE_COLOR,
-  transform: [{ translateY: 3 }],
-},
-
-  // =========================
-  // USUÁRIO
-  // =========================
+    fontSize: 22,
+    fontWeight: "700",
+    color: ACTIVE_COLOR,
+  },
 
   userContainer: {
-  flexDirection: "row",
-  alignItems: "center",
-  paddingHorizontal: CONTENT_PADDING,
-  marginTop: 30,
-},  
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: CONTENT_PADDING,
+    marginTop: 24,
+  },
+
+  profileImageWrapper: {
+    width: 58,
+    height: 58,
+    borderRadius: 29,
+    overflow: "hidden",
+  },
 
   profileImage: {
-    width: width * 0.14,
-    height: width * 0.14,
-    borderRadius: (width * 0.14) / 2,
+    width: "100%",
+    height: "100%",
+    borderRadius: 29,
   },
 
   userInfo: {
-    marginLeft: 12,
+    marginLeft: 14,
+    flex: 1,
   },
 
   userName: {
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: "700",
     color: "#161616",
   },
 
   date: {
-    fontSize: 12,
-    color: "#8a8a8a",
-    marginTop: 2,
+    fontSize: 13,
+    color: "#8A8A8A",
+    marginTop: 3,
   },
 
-  // =========================
-  // PUBLICAÇÃO
-  // =========================
-
   caption: {
-    fontSize: 15,
-    color: "#1a1a1a",
+    width: "100%",
+    fontSize: 17,
+    color: "#1A1A1A",
     paddingHorizontal: CONTENT_PADDING,
-    marginTop: 14,
+    marginTop: 18,
   },
 
   postImage: {
@@ -105,16 +103,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 
-  // =========================
-  // AÇÕES
-  // =========================
-
   actions: {
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: CONTENT_PADDING,
-    marginTop: 10,
+    marginTop: 12,
   },
 
   actionLeft: {
@@ -125,100 +120,85 @@ const styles = StyleSheet.create({
   action: {
     flexDirection: "row",
     alignItems: "center",
-    marginRight: 16,
-  },
-
-  actionIcon: {
-    width: 22,
-    height: 22,
-    resizeMode: "contain",
-  },
-
-  actionIconBookmark: {
-    width: 22,
-    height: 22,
-    resizeMode: "contain",
+    marginRight: 18,
   },
 
   actionText: {
-    fontSize: 13,
-    color: "#1a1a1a",
-    marginLeft: 4,
+    fontSize: 15,
+    color: "#1A1A1A",
+    marginLeft: 7,
   },
 
-  // =========================
-  // COMENTÁRIOS
-  // =========================
-
   commentsTitle: {
-    fontSize: 16,
+    width: "90%",
+    fontSize: 18,
     fontWeight: "700",
     color: "#161616",
     alignSelf: "center",
-    width: width * 0.9,
     marginTop: 32,
-
-    // SOBE APENAS O TÍTULO
-    transform: [{ translateY: -4 }],
   },
 
   comment: {
+    width: "90%",
     flexDirection: "row",
     alignSelf: "center",
-    width: width * 0.9,
-    marginTop: 10,
+    marginTop: 14,
+  },
+
+  commentImageWrapper: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    overflow: "hidden",
   },
 
   commentImage: {
-    width: width * 0.1,
-    height: width * 0.1,
-    borderRadius: (width * 0.1) / 2,
+    width: "100%",
+    height: "100%",
+    borderRadius: 22,
   },
 
   commentContent: {
+    flex: 1,
     marginLeft: 14,
-    flexShrink: 1,
   },
 
   commentName: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: "700",
     color: "#161616",
   },
 
   commentDate: {
-    fontSize: 11,
-    color: "#8a8a8a",
-    marginTop: 1,
+    fontSize: 12,
+    color: "#8A8A8A",
+    marginTop: 2,
   },
 
   commentText: {
-    fontSize: 13,
-    color: "#1a1a1a",
+    fontSize: 14,
+    color: "#1A1A1A",
     marginTop: 6,
   },
 
-  // =========================
-  // INPUT
-  // =========================
-
   inputWrapper: {
+    width: "100%",
     paddingHorizontal: CONTENT_PADDING,
     paddingTop: 10,
     paddingBottom: 10,
-    backgroundColor: "#f7f7f9",
+    backgroundColor: "#F7F7F9",
   },
 
   input: {
-    height: 46,
+    width: "100%",
+    height: 48,
     borderWidth: 1,
-    borderColor: "#d9d9dc",
-    borderRadius: 8,
+    borderColor: "#D9D9DC",
+    borderRadius: 10,
     paddingHorizontal: 14,
-    fontSize: 14,
-    backgroundColor: "#fff",
+    fontSize: 15,
+    backgroundColor: "#FFFFFF",
   },
-
 });
 
 export default styles;

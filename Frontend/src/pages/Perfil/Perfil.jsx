@@ -1,118 +1,220 @@
-import React from "react";
-import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
-import styles from "./Styles";
-import { SafeAreaView } from "react-native-web";
-import Footer from "../footer/Footer";
-import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react"
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from "react-native"
+import { Ionicons } from "@expo/vector-icons"
+import { SafeAreaView } from "react-native-safe-area-context"
+import styles from "./PerfilStyle"
+
+const PROFILE_IMAGE = require("../../../assets/images/img-exemplo.jpg")
 
 export default function Perfil({ navigation }) {
+  const [abaSelecionada, setAbaSelecionada] = useState("fotos")
+
+  const abrirPublicacao = () => {
+    navigation.navigate("DPublicacao", {
+      id: "1",
+      nome: "João Silva",
+      data: "Hoje às 10:30",
+      avatar: PROFILE_IMAGE,
+      texto: "Lugar lindo!!",
+      curtidas: 24,
+      comentarios: 4,
+    })
+  }
+
+  const publicacoes = [
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+    PROFILE_IMAGE,
+  ]
+
   return (
-    <View style={styles.container}>
-        <ScrollView>
+    <SafeAreaView style={styles.safeArea} edges={["top"]}>
+      <View style={styles.container}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+        >
+          <View style={styles.header}>
+            <View style={styles.headerEspaco} />
 
-                {/* Cabeçalho */}
-                <TouchableOpacity style={styles.header} onPress={() => navigation.navigate("EditarPerfil")}>
-                    <Image/>
-                    <Text style={styles.headerTitle}>Perfil</Text>
+            <Text style={styles.headerTitle}>
+              Perfil
+            </Text>
 
-                    <Image
-                        source={require("../../assets/fluent_settings-32-regular.png")}
-                    />
-                </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.settingsButton}
+              onPress={() => navigation.navigate("EditarPerfil")}
+              activeOpacity={0.7}
+            >
+              <Ionicons
+                name="settings-outline"
+                size={28}
+                color="#650000"
+              />
+            </TouchableOpacity>
+          </View>
 
-                {/* Foto de perfil */}
-                <View style={styles.profileArea}>
+          <View style={styles.profileArea}>
+            <View style={styles.profileImage}>
+  <Image
+    source={PROFILE_IMAGE}
+    style={styles.profileImageContent}
+    resizeMode="cover"
+  />
 
-                    <TouchableOpacity style={styles.profileImage} onPress={() => navigation.navigate("EditarPerfil")}>
-                        <Image
-                            source={require("../../assets/Rectangle 146.png")}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                        <View style={styles.lapizIcon}>
-                            <Ionicons
-                                name="pencil"
-                                size={14}
-                                color="#650000"
-                            />
-                        </View>
-                        
-                    </TouchableOpacity>
+  <TouchableOpacity
+    style={styles.lapizIcon}
+    onPress={() => navigation.navigate("EditarPerfil")}
+    activeOpacity={0.7}
+  >
+    <Ionicons
+      name="pencil"
+      size={20}
+      color="#650000"
+    />
+  </TouchableOpacity>
+</View>
 
-                    <Text style={styles.name}>Késsia Milena</Text>
-                    <Text style={styles.username}>@kessia.milena</Text>
+            <Text style={styles.name}>
+              Késsia Milena
+            </Text>
 
-                </View>
+            <Text style={styles.username}>
+              @kessia.milena
+            </Text>
+          </View>
 
-                {/* Estatísticas */}
-                <View style={styles.stats}>
+          <View style={styles.stats}>
+            <View style={styles.stat}>
+              <Text style={styles.statNumber}>
+                12
+              </Text>
 
-                    <View style={styles.stat}>
-                    <Text style={styles.statNumber}>12</Text>
-                    <Text style={styles.statLabel}>Publicações</Text>
-                    </View>
+              <Text style={styles.statLabel}>
+                Publicações
+              </Text>
+            </View>
 
-                    <View style={styles.stat}>
-                    <Text style={styles.statNumber}>150</Text>
-                    <Text style={styles.statLabel}>Seguidores</Text>
-                    </View>
+            <View style={styles.stat}>
+              <Text style={styles.statNumber}>
+                150
+              </Text>
 
-                    <View style={styles.stat}>
-                    <Text style={styles.statNumber}>80</Text>
-                    <Text style={styles.statLabel}>Seguindo</Text>
-                    </View>
+              <Text style={styles.statLabel}>
+                Seguidores
+              </Text>
+            </View>
 
-                </View>
+            <View style={styles.stat}>
+              <Text style={styles.statNumber}>
+                80
+              </Text>
 
-                {/* Bio */}
-                <Text style={styles.bio}>
-                    Desenvolvedora e entusiasta de tecnologia.{"\n"}
-                    Apaixonada por compartilhar conhecimento! 💙
-                </Text>
+              <Text style={styles.statLabel}>
+                Seguindo
+              </Text>
+            </View>
+          </View>
 
-                {/* Abas */}
-                <View style={styles.tabs}>
-                    <Image source={require('../../assets/healthicons_ui-menu-grid.png')}/>
-                    <Image source={require('../../assets/boxicons_bookmark.png')}/>
-                </View>
+          <Text style={styles.bio}>
+            Desenvolvedora e entusiasta de tecnologia.{"\n"}
+            Apaixonada por compartilhar conhecimento! 💙
+          </Text>
 
-                {/* Grade das publicações */}
-                <View style={styles.grid}>
+          <View style={styles.tabs}>
+            <TouchableOpacity
+              style={styles.tab}
+              onPress={() => setAbaSelecionada("fotos")}
+              activeOpacity={0.7}
+            >
+              <Ionicons
+                name={
+                  abaSelecionada === "fotos"
+                    ? "grid"
+                    : "grid-outline"
+                }
+                size={22}
+                color={
+                  abaSelecionada === "fotos"
+                    ? "#460303"
+                    : "#650000"
+                }
+              />
+            </TouchableOpacity>
 
-                    <Image style={styles.photoPlaceholder}
-                        source={require('../../assets/Rectangle 155.png')}
-                        onPress={() => navigation.navigate("DPublicacao")}
-                        resizeMode="cover"
-                    />
-                    <Image style={styles.photoPlaceholder}
-                        source={require('../../assets/Rectangle 156.png')}
-                        onPress={() => navigation.navigate("DPublicacao")}
-                        resizeMode="cover"
-                    />
-                    <Image style={styles.photoPlaceholder}
-                        source={require('../../assets/Rectangle 157.png')}
-                        onPress={() => navigation.navigate("DPublicacao")}
-                        resizeMode="cover"
-                    />
-                    <Image style={styles.photoPlaceholder}
-                        source={require('../../assets/Rectangle 159.png')}
-                        onPress={() => navigation.navigate("DPublicacao")}
-                        resizeMode="cover"
-                    />
-                    <Image style={styles.photoPlaceholder}
-                        source={require('../../assets/Rectangle 160.png')}
-                        onPress={() => navigation.navigate("DPublicacao")}
-                        resizeMode="cover"
-                    />
-                    <Image style={styles.photoPlaceholder}
-                        source={require('../../assets/Rectangle 161.png')}
-                        onPress={() => navigation.navigate("DPublicacao")}
-                        resizeMode="cover"
-                    />
+            <TouchableOpacity
+              style={styles.tab}
+              onPress={() => setAbaSelecionada("salvos")}
+              activeOpacity={0.7}
+            >
+              <Ionicons
+                name={
+                  abaSelecionada === "salvos"
+                    ? "bookmark"
+                    : "bookmark-outline"
+                }
+                size={23}
+                color={
+                  abaSelecionada === "salvos"
+                    ? "#460303"
+                    : "#650000"
+                }
+              />
+            </TouchableOpacity>
+          </View>
 
-                </View>
+          <View style={styles.tabLinha}>
+            <View
+              style={[
+                styles.tabLinhaParte,
+                abaSelecionada === "fotos"
+                  ? styles.tabLinhaAtiva
+                  : styles.tabLinhaInativa,
+              ]}
+            />
 
+            <View
+              style={[
+                styles.tabLinhaParte,
+                abaSelecionada === "salvos"
+                  ? styles.tabLinhaAtiva
+                  : styles.tabLinhaInativa,
+              ]}
+            />
+          </View>
+
+          <View style={styles.grid}>
+            {publicacoes.map((imagem, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={abrirPublicacao}
+                activeOpacity={0.8}
+              >
+                <Image
+                  style={styles.photoPlaceholder}
+                  source={imagem}
+                  resizeMode="cover"
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
         </ScrollView>
-        <Footer />
-    </View>
-  );
+      </View>
+    </SafeAreaView>
+  )
 }

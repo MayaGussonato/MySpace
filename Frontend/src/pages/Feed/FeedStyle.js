@@ -10,13 +10,6 @@ export const cores = {
 };
 
 const AVATAR_TAM = 46;
-const FOTO_L = 335;
-const FOTO_A = 604;
-const JANELA = 150;
-const ROSTO_X = 100;
-const ROSTO_Y = 195;
-
-const ESCALA = AVATAR_TAM / JANELA;
 
 export default StyleSheet.create({
   container: {
@@ -73,11 +66,8 @@ export default StyleSheet.create({
     overflow: 'hidden',
   },
   avatarImagem: {
-    position: 'absolute',
-    width: FOTO_L * ESCALA,
-    height: FOTO_A * ESCALA,
-    left: AVATAR_TAM / 2 - ROSTO_X * ESCALA,
-    top: AVATAR_TAM / 2 - ROSTO_Y * ESCALA,
+    width: AVATAR_TAM,
+    height: AVATAR_TAM,
   },
 
   infoUsuario: {

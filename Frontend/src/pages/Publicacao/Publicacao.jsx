@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -6,44 +6,47 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Ionicons, Feather } from "@expo/vector-icons";
+import styles, { ACTIVE_COLOR } from "./PublicacaoStyle";
 
-import {
-  SafeAreaProvider,
-  SafeAreaView,
-} from "react-native-safe-area-context";
+const ICON_COLOR = "#460303";
 
-import { Ionicons } from "@expo/vector-icons";
-
-import styles, { ACTIVE_COLOR } from "./dpublicacaoStyle";
-
-// FOOTER
-import Footer from "../../../src/components/footer/footer";
-
-// Ícones
-const likeIcon = require("../../../assets/Like.png");
-const commentIcon = require("../../../assets/Comentario.png");
-const bookmarkIcon = require("../../../assets/Favorito.png");
-
-// Imagens
-const profileUri = "https://i.pravatar.cc/150?img=15";
-const commentUserUri = "https://i.pravatar.cc/150?img=32";
+const profileImg = require("../../../assets/images/img-exemplo.jpg");
+const commentUserImg = require("../../../assets/images/img-exemplo2.jpg");
 
 const postUri =
   "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800";
 
-export default function DPublicacao({ navigation }) {
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
+export default function Publicacao({ navigation, publicacao }) {
+  const [curtido, setCurtido] = useState(false);
+  const [salvo, setSalvo] = useState(false);
 
+  const nome = publicacao?.nome || "João Silva";
+  const data = publicacao?.data || "Hoje às 10:30";
+  const texto = publicacao?.texto || "Lugar lindo!!";
+  const curtidas = publicacao?.curtidas ?? 24;
+  const comentarios = publicacao?.comentarios ?? 4;
+  const avatar = publicacao?.avatar || profileImg;
+
+  return (
+    <SafeAreaView
+      edges={["top", "bottom"]}
+      style={styles.container}
+    >
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
         <ScrollView
           style={styles.scroll}
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
-
-          {/* HEADER */}
           <View style={styles.header}>
             <TouchableOpacity
               style={styles.headerButton}
@@ -51,108 +54,99 @@ export default function DPublicacao({ navigation }) {
             >
               <Ionicons
                 name="chevron-back"
-                size={24}
-                color="#1a1a1a"
+                size={28}
+                color="#1A1A1A"
               />
             </TouchableOpacity>
 
-            <Text style={styles.title}>
-              Publicação
-            </Text>
+            <Text style={styles.title}>Publicação</Text>
 
             <View style={styles.headerSpace} />
           </View>
 
-          {/* USUÁRIO */}
           <View style={styles.userContainer}>
-            <Image
-              source={{ uri: profileUri }}
-              style={styles.profileImage}
-            />
+            <View style={styles.profileImageWrapper}>
+              <Image
+                source={avatar}
+                style={styles.profileImage}
+                resizeMode="cover"
+              />
+            </View>
 
             <View style={styles.userInfo}>
-              <Text style={styles.userName}>
-                João Silva
-              </Text>
-
-              <Text style={styles.date}>
-                Hoje às 10:30
-              </Text>
+              <Text style={styles.userName}>{nome}</Text>
+              <Text style={styles.date}>{data}</Text>
             </View>
           </View>
 
-          {/* LEGENDA */}
-          <Text style={styles.caption}>
-            Lugar lindo!!
-          </Text>
+          <Text style={styles.caption}>{texto}</Text>
 
-          {/* IMAGEM DA PUBLICAÇÃO */}
           <Image
             source={{ uri: postUri }}
             style={styles.postImage}
+            resizeMode="cover"
           />
 
-          {/* AÇÕES */}
           <View style={styles.actions}>
-
             <View style={styles.actionLeft}>
+              <TouchableOpacity
+                style={styles.action}
+                activeOpacity={0.6}
+                onPress={() => setCurtido(!curtido)}
+              >
+                <Feather
+                  name="heart"
+                  size={24}
+                  color={curtido ? ACTIVE_COLOR : ICON_COLOR}
+                />
 
-              {/* CURTIR */}
+                <Text style={styles.actionText}>
+                  {curtido ? curtidas + 1 : curtidas}
+                </Text>
+              </TouchableOpacity>
+
               <TouchableOpacity
                 style={styles.action}
                 activeOpacity={0.6}
               >
-                <Image
-                  source={likeIcon}
-                  style={styles.actionIcon}
+                <Feather
+                  name="message-circle"
+                  size={24}
+                  color={ICON_COLOR}
                 />
 
                 <Text style={styles.actionText}>
-                  24
+                  {comentarios}
                 </Text>
               </TouchableOpacity>
-
-              {/* COMENTAR */}
-              <TouchableOpacity
-                style={styles.action}
-                activeOpacity={0.6}
-              >
-                <Image
-                  source={commentIcon}
-                  style={styles.actionIcon}
-                />
-
-                <Text style={styles.actionText}>
-                  4
-                </Text>
-              </TouchableOpacity>
-
             </View>
 
-            {/* FAVORITO */}
-            <TouchableOpacity activeOpacity={0.6}>
-              <Image
-                source={bookmarkIcon}
-                style={styles.actionIconBookmark}
+            <TouchableOpacity
+              activeOpacity={0.6}
+              onPress={() => setSalvo(!salvo)}
+            >
+              <Feather
+                name="bookmark"
+                size={24}
+                color={salvo ? ACTIVE_COLOR : ICON_COLOR}
               />
             </TouchableOpacity>
-
           </View>
 
-          {/* COMENTÁRIOS */}
           <Text style={styles.commentsTitle}>
             Comentários
           </Text>
 
           <View style={styles.comment}>
-
-            <Image
-              source={{ uri: commentUserUri }}
-              style={styles.commentImage}
-            />
+            <View style={styles.commentImageWrapper}>
+              <Image
+                source={commentUserImg}
+                style={styles.commentImage}
+                resizeMode="cover"
+              />
+            </View>
 
             <View style={styles.commentContent}>
-
               <Text style={styles.commentName}>
                 Maria Oliveira
               </Text>
@@ -164,26 +158,18 @@ export default function DPublicacao({ navigation }) {
               <Text style={styles.commentText}>
                 Onde fica isso?
               </Text>
-
             </View>
-
           </View>
-
         </ScrollView>
 
-        {/* INPUT DE COMENTÁRIO */}
         <View style={styles.inputWrapper}>
           <TextInput
             style={styles.input}
             placeholder="Escreva um comentário..."
-            placeholderTextColor="#9a9a9a"
+            placeholderTextColor="#9A9A9A"
           />
         </View>
-
-        {/* FOOTER */}
-        <Footer />
-
-      </SafeAreaView>
-    </SafeAreaProvider>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }

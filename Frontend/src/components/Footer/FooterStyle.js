@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 
 export const coresFooter = {
   branco: "#FFFFFF",
@@ -10,13 +10,12 @@ export const coresFooter = {
 export default StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "space-around",
     backgroundColor: coresFooter.branco,
     borderTopWidth: 2,
     borderTopColor: coresFooter.linha,
     paddingTop: 8,
-    paddingBottom: Platform.OS === "ios" ? 24 : 10,
   },
   item: {
     flex: 1,

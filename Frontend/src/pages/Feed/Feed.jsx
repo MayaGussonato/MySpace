@@ -69,12 +69,12 @@ const PUBLICACOES = [
   },
 ];
 
-function Publicacao({ item }) {
+function Publicacao({ item, onPress }) {
   const [curtido, setCurtido] = useState(false);
   const [salvo, setSalvo] = useState(false);
 
   return (
-    <View style={styles.card}>
+    <Pressable style={styles.card} onPress={onPress}>
       <View style={styles.cardTopo}>
         <View style={styles.avatar}>
           <Image source={item.avatar} style={styles.avatarImagem} />
@@ -119,11 +119,11 @@ function Publicacao({ item }) {
           />
         </Pressable>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
-export default function Feed() {
+export default function Feed({ onAbrirPublicacao }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={cores.fundo} />
@@ -139,7 +139,9 @@ export default function Feed() {
       <FlatList
         data={PUBLICACOES}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Publicacao item={item} />}
+        renderItem={({ item }) => (
+          <Publicacao item={item} onPress={() => onAbrirPublicacao(item)} />
+        )}
         contentContainerStyle={styles.lista}
         showsVerticalScrollIndicator={false}
       />

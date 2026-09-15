@@ -4,39 +4,43 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 32,
+    paddingTop: 50,
   },
 
   titulo: {
     textAlign: "center",
-    fontSize: 17,
-    fontWeight: "bold",
-    color: "#5d0808",
-    marginTop: 20,
-    marginBottom: 20,
+    fontSize: 24,
+    fontWeight: "700",
+    fontFamily: "Inter_600SemiBold",
+    color: "#460303",
+    marginBottom: 22,
+  },
+
+  scroll: {
+    flex: 1,
   },
 
   lista: {
-    paddingHorizontal: 28,
-    paddingBottom: 20,
+    paddingHorizontal: 24,
+    paddingBottom: 30,
   },
 
   card: {
     width: "100%",
-    minHeight: 66,
-    borderWidth: 1.5,
-    borderColor: "#c7c7c7",
-    borderRadius: 7,
-    marginBottom: 15,
-    paddingHorizontal: 9,
-    paddingVertical: 8,
+    minHeight: 120,
+    borderWidth: 1,
+    borderColor: "#B7B7B7",
+    borderRadius: 18,
+    marginBottom: 18,
+    paddingHorizontal: 22,
+    paddingVertical: 18,
     flexDirection: "row",
     alignItems: "center",
   },
 
   icone: {
-    width: 35,
-    marginRight: 1,
+    width: 38,
+    marginRight: 18,
   },
 
   conteudo: {
@@ -45,19 +49,22 @@ const styles = StyleSheet.create({
   },
 
   texto: {
-    fontSize: 11.5,
-    color: "#222",
-    lineHeight: 14,
+    fontSize: 18,
+    color: "#1a1a1a",
+    lineHeight: 27,
+    fontFamily: "Inter_400Regular",
   },
 
   negrito: {
-    fontWeight: "bold",
+    fontWeight: "700",
+    fontFamily: "Inter_600SemiBold",
   },
 
   horario: {
-    fontSize: 11,
+    fontSize: 16,
     color: "#666",
-    marginTop: 5,
+    marginTop: 8,
+    fontFamily: "Inter_400Regular",
   },
 });
 

@@ -1,87 +1,143 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 export const cores = {
-  fundo: '#FFFFFF',
-  vinho: '#7B1B27',
-  texto: '#1E1E1E',
-  placeholder: '#B3B0B8',
-  borda: '#E3E1E6',
-  contador: '#B3B0B8',
+  fundo: "#FFFFFF",
+  primaria: "#460303",
+  texto: "#222222",
+  placeholder: "#999999",
+  caixa: "#F2F2F2",
 };
 
-export default StyleSheet.create({
+const LATERAL = Math.max(20, width * 0.055);
+
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: cores.fundo,
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: Platform.OS === 'android' ? 16 : 8,
-    paddingBottom: 18,
-  },
-  botaoVoltar: {
-    width: 40,
-    padding: 4,
-  },
-  titulo: {
+
+  conteudo: {
     flex: 1,
-    textAlign: 'center',
-    marginRight: 40,
-    fontSize: 17,
-    color: cores.texto,
-    fontFamily: 'Inter_600SemiBold',
+    paddingHorizontal: LATERAL,
+    paddingTop: Platform.OS === "ios" ? 12 : 18,
   },
+
+  header: {
+    height: 52,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  botaoVoltar: {
+    width: 36,
+    height: 36,
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+
+  espacoHeader: {
+    width: 36,
+  },
+
+  titulo: {
+    fontSize: 19,
+    fontWeight: "700",
+    color: cores.primaria,
+    fontFamily: "Inter_600SemiBold",
+  },
+
   pergunta: {
     fontSize: 16,
+    fontWeight: "600",
     color: cores.texto,
-    marginHorizontal: 16,
-    marginTop: 28,
-    marginBottom: 14,
-    fontFamily: 'Inter_600SemiBold',
+    marginTop: 20,
+    marginBottom: 12,
+    fontFamily: "Inter_600SemiBold",
   },
+
+  caixaPrincipal: {
+    width: "100%",
+    backgroundColor: cores.caixa,
+    borderRadius: 12,
+    padding: 12,
+  },
+
   caixa: {
-    marginHorizontal: 16,
+    width: "100%",
+    minHeight: 250,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 9,
     borderWidth: 1,
-    borderColor: cores.borda,
-    borderRadius: 14,
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 10,
-    minHeight: 280,
+    borderColor: "#E0E0E0",
+    overflow: "hidden",
   },
+
   campoTexto: {
     flex: 1,
+    minHeight: 120,
+    paddingHorizontal: 14,
+    paddingTop: 14,
+    paddingBottom: 32,
     fontSize: 15,
     color: cores.texto,
-    fontFamily: 'Inter_400Regular',
-    textAlignVertical: 'top',
+    fontFamily: "Inter_400Regular",
   },
+
   contador: {
-    alignSelf: 'flex-end',
-    fontSize: 12,
-    color: cores.contador,
-    fontFamily: 'Inter_400Regular',
-    marginTop: 8,
+    position: "absolute",
+    right: 12,
+    bottom: 9,
+    fontSize: 11,
+    color: "#999999",
+    fontFamily: "Inter_400Regular",
   },
-  acoes: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 20,
+
+acoes: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  width: "100%",
+  marginTop: 14,
+  paddingHorizontal: 0,
+},
+
+acao: {
+  width: "32%",
+  alignItems: "center",
+  justifyContent: "center",
+  minHeight: 42,
+},
+
+iconeAcao: {
+  marginBottom: 4,
+},
+
+rotuloAcao: {
+  fontSize: 12,
+  color: cores.primaria,
+  fontFamily: "Inter_500Medium",
+  textAlign: "center",
+},
+
+  botaoPublicar: {
+    width: "100%",
+    height: 48,
+    backgroundColor: cores.primaria,
+    borderRadius: 9,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 35,
   },
-  acao: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 24,
-  },
-  iconeAcao: {
-    marginRight: 6,
-  },
-  rotuloAcao: {
-    fontSize: 13,
-    color: cores.texto,
-    fontFamily: 'Inter_500Medium',
+
+  textoPublicar: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontWeight: "700",
+    fontFamily: "Inter_600SemiBold",
   },
 });
+
+export default styles;
