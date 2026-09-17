@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const coresFooter = {
   branco: "#FFFFFF",
-  linha: "#B01C2E",
+  linha: "#460303",
   ativo: "#7B1B27",
   inativo: "#B3B0B8",
 };

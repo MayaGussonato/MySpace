@@ -1,237 +1,310 @@
-import { StyleSheet, Dimensions } from "react-native"
+import { StyleSheet, Platform, Dimensions } from "react-native"
 
 const { width } = Dimensions.get("window")
 
-export const ACTIVE_COLOR = "#460303"
+const ESPACAMENTO_LATERAL = Math.max(
+    24,
+    Math.min(30, width * 0.075)
+)
 
-const CONTENT_PADDING = width * 0.05
-
-const styles = StyleSheet.create({
+export default StyleSheet.create({
     container: {
         flex: 1,
-        width: "100%",
         backgroundColor: "#FFFFFF",
     },
 
-    scroll: {
+    teclado: {
         flex: 1,
-        width: "100%",
-    },
-
-    scrollContent: {
-        paddingBottom: 20,
     },
 
     header: {
+        height: Platform.OS === "ios" ? 70 : 64,
         width: "100%",
-        flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between",
-        paddingHorizontal: CONTENT_PADDING,
-        paddingTop: 12,
-        paddingBottom: 12,
+        justifyContent: "center",
+        backgroundColor: "#FFFFFF",
+        position: "relative",
     },
 
-    headerButton: {
-        width: 40,
+    botaoVoltar: {
+        position: "absolute",
+        left: ESPACAMENTO_LATERAL,
+        width: 36,
         height: 40,
         alignItems: "flex-start",
         justifyContent: "center",
     },
 
-    headerSpace: {
-        width: 40,
-    },
-
-    title: {
-        fontSize: 22,
+    titulo: {
+        fontSize: 19,
         fontFamily: "Inter_600SemiBold",
-        color: ACTIVE_COLOR,
+        color: "#650000",
+        textAlign: "center",
+        letterSpacing: 0,
     },
 
-    userContainer: {
+    headerEspaco: {
+        width: 36,
+        height: 40,
+    },
+
+    conteudo: {
+        paddingHorizontal: ESPACAMENTO_LATERAL,
+        paddingTop: 8,
+        paddingBottom: 18,
+    },
+
+    card: {
+        width: "100%",
+        backgroundColor: "#FFFFFF",
+    },
+
+    cardTopo: {
         width: "100%",
         flexDirection: "row",
         alignItems: "center",
-        paddingHorizontal: CONTENT_PADDING,
-        marginTop: 24,
     },
 
-    profileImageWrapper: {
-        width: 58,
-        height: 58,
-        borderRadius: 29,
+    usuario: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+
+    avatarContainer: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
         overflow: "hidden",
+        backgroundColor: "#EEEEEE",
     },
 
-    profileImage: {
-        width: "100%",
-        height: "100%",
-        borderRadius: 29,
+    avatar: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
     },
 
-    userInfo: {
-        marginLeft: 14,
+    avatarImagem: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+    },
+
+    avatarSemImagem: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#EEEEEE",
+    },
+
+    infoUsuario: {
         flex: 1,
+        marginLeft: 10,
     },
 
-    userName: {
-        fontSize: 17,
-        fontFamily: "Inter_600SemiBold",
-        color: ACTIVE_COLOR,
-    },
-
-    date: {
-        fontSize: 13,
-        color: "#8A8A8A",
-        marginTop: 3,
-        fontFamily: "Inter_400Regular",
-    },
-
-    caption: {
-        width: "100%",
-        fontSize: 17,
-        color: "#1A1A1A",
-        paddingHorizontal: CONTENT_PADDING,
-        marginTop: 18,
-        fontFamily: "Inter_400Regular",
-    },
-
-    postImage: {
-        width: width * 0.9,
-        aspectRatio: 16 / 10,
-        borderRadius: 10,
-        alignSelf: "center",
-        marginTop: 16,
-    },
-
-    actions: {
-        width: "100%",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        paddingHorizontal: CONTENT_PADDING,
-        marginTop: 12,
-    },
-
-    actionLeft: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
-
-    action: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginRight: 18,
-    },
-
-    actionText: {
-        fontSize: 15,
-        color: "#1A1A1A",
-        marginLeft: 7,
-        fontFamily: "Inter_400Regular",
-    },
-
-    commentsTitle: {
-        width: "90%",
-        fontSize: 18,
-        fontFamily: "Inter_600SemiBold",
-        color: "#161616",
-        alignSelf: "center",
-        marginTop: 32,
-    },
-
-    comment: {
-        width: "90%",
-        flexDirection: "row",
-        alignSelf: "center",
-        marginTop: 14,
-        paddingBottom: 14,
-    },
-
-    commentImageWrapper: {
-        width: 44,
-        height: 44,
-        borderRadius: 22,
-        overflow: "hidden",
-    },
-
-    commentImage: {
-        width: "100%",
-        height: "100%",
-        borderRadius: 22,
-    },
-
-    commentContent: {
-        flex: 1,
-        marginLeft: 14,
-    },
-
-    commentName: {
-        fontSize: 15,
-        fontFamily: "Inter_600SemiBold",
-        color: ACTIVE_COLOR,
-    },
-
-    commentDate: {
-        fontSize: 12,
-        color: "#8A8A8A",
-        marginTop: 2,
-        fontFamily: "Inter_400Regular",
-    },
-
-    commentText: {
+    nome: {
         fontSize: 14,
-        color: "#1A1A1A",
-        marginTop: 6,
+        color: "#1E1E1E",
+        fontFamily: "Inter_600SemiBold",
+    },
+
+    data: {
+        marginTop: 2,
+        fontSize: 11,
+        color: "#777777",
         fontFamily: "Inter_400Regular",
     },
 
-    commentDivider: {
-        width: "90%",
-        height: 1,
-        backgroundColor: "#D9D9D9",
-        alignSelf: "center",
+    texto: {
+        marginTop: 12,
+        marginBottom: 10,
+        fontSize: 14,
+        lineHeight: 20,
+        color: "#1E1E1E",
+        fontFamily: "Inter_400Regular",
+    },
+
+    imagem: {
+        width: "100%",
+        height: 280,
+        borderRadius: 12,
+        marginTop: 0,
+    },
+
+    informacao: {
+        width: "100%",
+        marginTop: 7,
+    },
+
+    informacaoTexto: {
+        fontSize: 12,
+        color: "#555555",
+        fontFamily: "Inter_400Regular",
+    },
+
+    localizacao: {
+        width: "100%",
+        minHeight: 40,
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: 8,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        borderWidth: 1,
+        borderColor: "#E0E0E0",
+        borderRadius: 8,
+        backgroundColor: "#FFFFFF",
+    },
+
+    textoLocalizacao: {
+        flex: 1,
+        marginLeft: 7,
+        fontSize: 12,
+        lineHeight: 17,
+        color: "#555555",
+        fontFamily: "Inter_400Regular",
+    },
+
+    sentimento: {
+        width: "100%",
+        marginTop: 7,
+    },
+
+    textoSentimento: {
+        fontSize: 12,
+        color: "#555555",
+        fontFamily: "Inter_400Regular",
+    },
+
+    acoes: {
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: 7,
+        paddingBottom: 12,
+    },
+
+    acao: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginRight: 22,
+        paddingVertical: 4,
+    },
+
+    acaoSalvar: {
+        marginLeft: "auto",
+        paddingVertical: 4,
+    },
+
+    contador: {
+        marginLeft: 6,
+        fontSize: 13,
+        color: "#1E1E1E",
+        fontFamily: "Inter_400Regular",
+    },
+
+    tituloComentarios: {
         marginTop: 2,
-        marginBottom: 8,
+        marginBottom: 12,
+        fontSize: 14,
+        color: "#1E1E1E",
+        fontFamily: "Inter_600SemiBold",
+    },
+
+    comentarios: {
+        width: "100%",
+    },
+
+    comentario: {
+        flexDirection: "row",
+        marginBottom: 15,
+    },
+
+    avatarComentario: {
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+        backgroundColor: "#EEEEEE",
+    },
+
+    imagemAvatarComentario: {
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+    },
+
+    conteudoComentario: {
+        flex: 1,
+        marginLeft: 8,
+    },
+
+    nomeComentario: {
+        fontSize: 13,
+        color: "#1E1E1E",
+        fontFamily: "Inter_600SemiBold",
+    },
+
+    dataComentario: {
+        marginTop: 1,
+        fontSize: 10,
+        color: "#888888",
+        fontFamily: "Inter_400Regular",
+    },
+
+    textoComentario: {
+        marginTop: 7,
+        fontSize: 12,
+        lineHeight: 18,
+        color: "#1E1E1E",
+        fontFamily: "Inter_400Regular",
+    },
+
+    espacoFinal: {
+        height: 10,
+    },
+
+    containerComentario: {
+        width: "100%",
+        paddingHorizontal: ESPACAMENTO_LATERAL,
+        paddingTop: 9,
+        paddingBottom: Platform.OS === "ios" ? 12 : 10,
+        backgroundColor: "#FFFFFF",
     },
 
     inputWrapper: {
         width: "100%",
-        paddingHorizontal: CONTENT_PADDING,
-        paddingTop: 10,
-        paddingBottom: 10,
-        backgroundColor: "#F7F7F9",
-    },
-
-    inputContainer: {
-        width: "100%",
-        height: 48,
+        height: 44,
         flexDirection: "row",
         alignItems: "center",
         borderWidth: 1,
-        borderColor: "#D9D9DC",
-        borderRadius: 10,
+        borderColor: "#D5D5D5",
+        borderRadius: 8,
         backgroundColor: "#FFFFFF",
+        position: "relative",
     },
 
-    input: {
+    inputComentario: {
         flex: 1,
-        height: 48,
-        paddingHorizontal: 14,
-        paddingVertical: 0,
-        fontSize: 15,
-        color: "#1A1A1A",
-        backgroundColor: "#FFFFFF",
+        height: 42,
+        paddingHorizontal: 13,
+        paddingVertical: 9,
+        paddingRight: 44,
+        fontSize: 13,
+        color: "#1E1E1E",
         fontFamily: "Inter_400Regular",
     },
 
-    sendButton: {
-        width: 48,
-        height: 48,
+    botaoEnviar: {
+        position: "absolute",
+        right: 5,
+        width: 34,
+        height: 34,
         alignItems: "center",
         justifyContent: "center",
     },
 })
-
-export default styles

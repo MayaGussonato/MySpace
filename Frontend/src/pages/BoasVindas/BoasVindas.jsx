@@ -2,13 +2,13 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
 import { styles } from './BoasVindasStyle';
 
-export default function BoasVindas() {
+export default function BoasVindas({ navigation }) {
     function irParaLogin() {
-        console.log('ir para login');
+        navigation?.navigate?.('Login');
     }
 
     function irParaCadastro() {
-        console.log('ir para cadastro');
+        navigation?.navigate?.('CriarConta');
     }
 
     return (

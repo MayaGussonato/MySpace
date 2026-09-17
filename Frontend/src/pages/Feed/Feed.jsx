@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
     View,
     Text,
@@ -7,159 +6,421 @@ import {
     Pressable,
     StatusBar,
     SafeAreaView,
+    Alert,
 } from "react-native"
+
 import { Feather, Ionicons } from "@expo/vector-icons"
 import styles, { cores } from "./FeedStyle"
+import { useUsuario } from "../../contexts/UsuarioContext"
+import { PUBLICACOES } from "../../data/publicacoes"
 
-const AVATAR = require("../../../assets/images/img-exemplo.jpg")
+function Publicacao({
+    item,
+    onPress,
+    onEditar,
+}) {
+    const {
+        curtidas,
+        salvos,
+        alternarCurtida,
+        alternarSalvo,
+        excluirPublicacao,
+        obterQuantidadeCurtidas,
+        obterQuantidadeComentarios,
+    } = useUsuario()
 
-const PUBLICACOES = [
-    {
-        id: "1",
-        nome: "Mariana Costa",
-        data: "Hoje às 08:42",
-        avatar: require("../../../assets/images/img-exemplo4.jpg"),
-        imagem: require("../../../assets/images/img-exemplo4.jpg"),
-        texto: "Começando o dia com um café e uma vista dessas ☕✨",
-        curtidas: 184,
-        comentarios: 23,
-    },
-    {
-        id: "2",
-        nome: "Lucas Mendes",
-        data: "Hoje às 07:15",
-        avatar: require("../../../assets/images/img-exemplo.jpg"),
-        imagem: require("../../../assets/images/img-exemplo.jpg"),
-        texto: "Depois de muito tempo, finalmente consegui conhecer esse lugar. Experiência incrível!",
-        curtidas: 326,
-        comentarios: 41,
-    },
-    {
-        id: "3",
-        nome: "Beatriz Oliveira",
-        data: "Ontem às 21:38",
-        avatar: require("../../../assets/images/img-exemplo2.jpg"),
-        imagem: require("../../../assets/images/img-exemplo2.jpg"),
-        texto: "Um jantar simples, uma boa companhia e uma noite perfeita ❤️",
-        curtidas: 512,
-        comentarios: 67,
-    },
-    {
-        id: "4",
-        nome: "Rafael Almeida",
-        data: "Ontem às 18:24",
-        avatar: require("../../../assets/images/img-exemplo3.jpg"),
-        imagem: require("../../../assets/images/img-exemplo3.jpg"),
-        texto: "Explorando novos lugares e aproveitando cada momento dessa viagem 📸",
-        curtidas: 278,
-        comentarios: 32,
-    },
-    {
-        id: "5",
-        nome: "Ana Clara Santos",
-        data: "Ontem às 15:07",
-        avatar: require("../../../assets/images/img-exemplo5.jpg"),
-        imagem: require("../../../assets/images/img-exemplo5.jpg"),
-        texto: "Finalmente terminei esse projeto! Foram dias de muito trabalho, mas valeu a pena.",
-        curtidas: 439,
-        comentarios: 54,
-    },
-    {
-        id: "6",
-        nome: "Gabriel Souza",
-        data: "12 de setembro às 19:52",
-        avatar: require("../../../assets/images/img-exemplo6.jpg"),
-        imagem: require("../../../assets/images/img-exemplo6.jpg"),
-        texto: "Fim de tarde perfeito para esquecer um pouco da rotina 🌅",
-        curtidas: 691,
-        comentarios: 89,
-    },
-]
+    function formatarData(data) {
+        if (!data) return ""
 
-function Publicacao({ item, onPress }) {
-    const [curtido, setCurtido] = useState(false)
-    const [salvo, setSalvo] = useState(false)
+        const dataPublicacao = new Date(data)
+
+        if (isNaN(dataPublicacao.getTime())) {
+            return data
+        }
+
+        const horas = String(
+            dataPublicacao.getHours()
+        ).padStart(2, "0")
+
+        const minutos = String(
+            dataPublicacao.getMinutes()
+        ).padStart(2, "0")
+
+        return `${horas}:${minutos}`
+    }
+
+    function formatarLocalizacao(localizacao) {
+        if (!localizacao) return ""
+
+        if (typeof localizacao === "string") {
+            return localizacao
+        }
+
+        if (typeof localizacao === "object") {
+            const partes = []
+
+            if (localizacao.rua) {
+                if (localizacao.numero) {
+                    partes.push(
+                        `${localizacao.rua}, ${localizacao.numero}`
+                    )
+                } else {
+                    partes.push(
+                        localizacao.rua
+                    )
+                }
+            }
+
+            if (localizacao.cidade) {
+                partes.push(
+                    localizacao.cidade
+                )
+            }
+
+            if (localizacao.estado) {
+                partes.push(
+                    localizacao.estado
+                )
+            }
+
+            return partes.join(" - ")
+        }
+
+        return ""
+    }
+
+    function formatarSentimento(sentimento) {
+        if (!sentimento) return ""
+
+        if (typeof sentimento === "string") {
+            return sentimento
+        }
+
+        if (typeof sentimento === "object") {
+            const emoji =
+                sentimento.emoji || ""
+
+            const nome =
+                sentimento.nome || ""
+
+            return `${emoji} ${nome}`.trim()
+        }
+
+        return ""
+    }
+
+    function abrirOpcoes() {
+        Alert.alert(
+            "",
+            "O que você deseja fazer?",
+            [
+                {
+                    text: "Editar post",
+                    onPress: () =>
+                        onEditar(item),
+                },
+                {
+                    text: "Excluir post",
+                    style: "destructive",
+                    onPress: () => {
+                        Alert.alert(
+                            "",
+                            "Tem certeza que deseja excluir?",
+                            [
+                                {
+                                    text: "Não",
+                                    style: "cancel",
+                                },
+                                {
+                                    text: "Sim",
+                                    style: "destructive",
+                                    onPress: () =>
+                                        excluirPublicacao(
+                                            item.id
+                                        ),
+                                },
+                            ]
+                        )
+                    },
+                },
+                {
+                    text: "Cancelar",
+                    style: "cancel",
+                },
+            ]
+        )
+    }
+
+    const curtido =
+        !!curtidas[item.id]
+
+    const salvo =
+        salvos.includes(item.id)
+
+    const quantidadeCurtidas =
+        obterQuantidadeCurtidas(item)
+
+    const quantidadeComentarios =
+        obterQuantidadeComentarios(item)
+
+    const localizacao =
+        formatarLocalizacao(
+            item.localizacao
+        )
+
+    const sentimento =
+        formatarSentimento(
+            item.sentimento
+        )
 
     return (
-        <Pressable style={styles.card} onPress={onPress}>
+        <Pressable
+            style={styles.card}
+            onPress={onPress}
+        >
             <View style={styles.cardTopo}>
                 <View style={styles.avatar}>
-                    <Image
-                        source={item.avatar}
-                        style={styles.avatarImagem}
-                    />
+                    {item.avatar ? (
+                        <Image
+                            source={
+                                typeof item.avatar ===
+                                "string"
+                                    ? {
+                                          uri: item.avatar,
+                                      }
+                                    : item.avatar
+                            }
+                            style={
+                                styles.avatarImagem
+                            }
+                            resizeMode="cover"
+                        />
+                    ) : (
+                        <View
+                            style={{
+                                flex: 1,
+                                alignItems:
+                                    "center",
+                                justifyContent:
+                                    "center",
+                                backgroundColor:
+                                    "#E0C98F",
+                            }}
+                        >
+                            <Feather
+                                name="user"
+                                size={22}
+                                color={
+                                    cores.vinho
+                                }
+                            />
+                        </View>
+                    )}
                 </View>
 
-                <View style={styles.infoUsuario}>
-                    <Text style={styles.nome}>{item.nome}</Text>
-                    <Text style={styles.data}>{item.data}</Text>
+                <View
+                    style={
+                        styles.infoUsuario
+                    }
+                >
+                    <Text
+                        style={
+                            styles.nome
+                        }
+                    >
+                        {item.nome ||
+                            "Usuário"}
+                    </Text>
+
+                    <Text
+                        style={
+                            styles.data
+                        }
+                    >
+                        {formatarData(
+                            item.data
+                        )}
+                    </Text>
                 </View>
 
                 <Pressable
-                    style={styles.botaoOpcoes}
-                    hitSlop={10}
+                    style={
+                        styles.botaoOpcoes
+                    }
+                    onPress={event => {
+                        event.stopPropagation()
+                        abrirOpcoes()
+                    }}
                 >
                     <Feather
                         name="more-horizontal"
                         size={22}
-                        color={cores.vinho}
+                        color={
+                            cores.vinho
+                        }
                     />
                 </Pressable>
             </View>
 
-            <Text style={styles.texto}>{item.texto}</Text>
+            {item.texto ? (
+                <Text style={styles.texto}>
+                    {item.texto}
+                </Text>
+            ) : null}
+
+            {item.imagem ? (
+                <Image
+                    source={
+                        typeof item.imagem ===
+                        "string"
+                            ? {
+                                  uri: item.imagem,
+                              }
+                            : item.imagem
+                    }
+                    style={{
+                        width: "100%",
+                        height: 280,
+                        borderRadius: 12,
+                        marginBottom: 12,
+                    }}
+                    resizeMode="cover"
+                />
+            ) : null}
+
+            {localizacao ? (
+                <View
+                    style={{
+                        flexDirection:
+                            "row",
+                        alignItems:
+                            "center",
+                        marginBottom: 8,
+                    }}
+                >
+                    <Feather
+                        name="map-pin"
+                        size={14}
+                        color={
+                            cores.vinho
+                        }
+                    />
+
+                    <Text
+                        style={{
+                            marginLeft: 5,
+                            fontSize: 12,
+                            color:
+                                cores.cinza,
+                            fontFamily:
+                                "Inter_400Regular",
+                        }}
+                    >
+                        {localizacao}
+                    </Text>
+                </View>
+            ) : null}
+
+            {sentimento ? (
+                <View
+                    style={{
+                        flexDirection:
+                            "row",
+                        alignItems:
+                            "center",
+                        marginBottom: 8,
+                    }}
+                >
+                    <Text
+                        style={{
+                            fontSize: 13,
+                            color:
+                                cores.cinza,
+                            fontFamily:
+                                "Inter_400Regular",
+                        }}
+                    >
+                        {sentimento}
+                    </Text>
+                </View>
+            ) : null}
 
             <View style={styles.acoes}>
                 <Pressable
                     style={styles.acao}
-                    onPress={(event) => {
+                    onPress={event => {
                         event.stopPropagation()
-                        setCurtido(!curtido)
+                        alternarCurtida(
+                            item.id
+                        )
                     }}
                 >
                     <Ionicons
-                        name={curtido ? "heart" : "heart-outline"}
-                        size={22}
-                        color={cores.vinho}
+                        name={
+                            curtido
+                                ? "heart"
+                                : "heart-outline"
+                        }
+                        size={23}
+                        color={
+                            cores.vinho
+                        }
                     />
 
-                    <Text style={styles.contador}>
-                        {curtido
-                            ? item.curtidas + 1
-                            : item.curtidas}
+                    <Text
+                        style={
+                            styles.contador
+                        }
+                    >
+                        {quantidadeCurtidas}
                     </Text>
                 </Pressable>
 
                 <Pressable
                     style={styles.acao}
-                    onPress={(event) => {
+                    onPress={event => {
                         event.stopPropagation()
+                        onPress()
                     }}
                 >
                     <Ionicons
                         name="chatbubble-outline"
                         size={21}
-                        color={cores.vinho}
+                        color={
+                            cores.vinho
+                        }
                     />
 
-                    <Text style={styles.contador}>
-                        {item.comentarios}
+                    <Text
+                        style={
+                            styles.contador
+                        }
+                    >
+                        {
+                            quantidadeComentarios
+                        }
                     </Text>
                 </Pressable>
 
-                <View style={styles.espaco} />
-
                 <Pressable
-                    hitSlop={10}
-                    onPress={(event) => {
+                    style={styles.acao}
+                    onPress={event => {
                         event.stopPropagation()
-                        setSalvo(!salvo)
+                        alternarSalvo(
+                            item.id
+                        )
                     }}
                 >
                     <Ionicons
-                        name={salvo ? "bookmark" : "bookmark-outline"}
+                        name={
+                            salvo
+                                ? "bookmark"
+                                : "bookmark-outline"
+                        }
                         size={22}
-                        color={cores.vinho}
+                        color={
+                            cores.vinho
+                        }
                     />
                 </Pressable>
             </View>
@@ -167,47 +428,123 @@ function Publicacao({ item, onPress }) {
     )
 }
 
-export default function Feed({ onAbrirPublicacao }) {
+export default function Feed({
+    onAbrirPublicacao,
+    onAbrirNotificacoes,
+    onAbrirCriar,
+    onEditarPublicacao,
+}) {
+    const {
+        publicacoes: novasPublicacoes,
+    } = useUsuario()
+
+    const publicacoesIniciais =
+        PUBLICACOES || []
+
+    const novas =
+        novasPublicacoes || []
+
+    const idsIniciais =
+        new Set(
+            publicacoesIniciais.map(
+                item =>
+                    item.id.toString()
+            )
+        )
+
+    const publicacoesDoUsuario =
+        novas.filter(
+            item =>
+                !idsIniciais.has(
+                    item.id.toString()
+                )
+        )
+
+    const todasPublicacoes = [
+        ...publicacoesDoUsuario,
+        ...publicacoesIniciais,
+    ]
+
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView
+            style={styles.container}
+        >
             <StatusBar
                 barStyle="dark-content"
-                backgroundColor={cores.fundo}
+                backgroundColor={
+                    cores.fundo
+                }
             />
 
             <View style={styles.header}>
-                <Text style={styles.logoTexto}>MySpace</Text>
+                <Text
+                    style={
+                        styles.logoTexto
+                    }
+                >
+                    MySpace
+                </Text>
 
                 <Pressable
-                    style={styles.botaoSino}
-                    hitSlop={10}
+                    style={
+                        styles.botaoSino
+                    }
+                    onPress={
+                        onAbrirNotificacoes
+                    }
                 >
-                    <Feather
-                        name="bell"
-                        size={26}
-                        color={cores.vinho}
+                    <Ionicons
+                        name="notifications-outline"
+                        size={25}
+                        color={
+                            cores.vinho
+                        }
                     />
                 </Pressable>
             </View>
 
             <FlatList
-                data={PUBLICACOES}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
+                data={
+                    todasPublicacoes
+                }
+                keyExtractor={item =>
+                    item.id.toString()
+                }
+                renderItem={({
+                    item,
+                }) => (
                     <Publicacao
                         item={item}
-                        onPress={() => onAbrirPublicacao(item)}
+                        onPress={() =>
+                            onAbrirPublicacao(
+                                item
+                            )
+                        }
+                        onEditar={
+                            onEditarPublicacao
+                        }
                     />
                 )}
-                contentContainerStyle={styles.lista}
-                showsVerticalScrollIndicator={false}
+                showsVerticalScrollIndicator={
+                    false
+                }
+                contentContainerStyle={
+                    styles.lista
+                }
             />
 
-            <Pressable style={styles.fab}>
+            <Pressable
+                style={styles.fab}
+                onPress={
+                    onAbrirCriar
+                }
+            >
                 <Feather
                     name="plus"
-                    size={30}
-                    color="#FFFFFF"
+                    size={27}
+                    color={
+                        cores.branco
+                    }
                 />
             </Pressable>
         </SafeAreaView>

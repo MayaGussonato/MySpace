@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native"
 
 const { width } = Dimensions.get("window")
+
 const CONTENT_PADDING = width * 0.06
 
 const styles = StyleSheet.create({
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
         fontSize: 19,
         fontFamily: "Inter_600SemiBold",
         color: "#650000",
+        letterSpacing: 0,
     },
 
     headerSpace: {
@@ -60,6 +62,15 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: "#650000",
         backgroundColor: "#EEEEEE",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+    },
+
+    photoImage: {
+        width: "100%",
+        height: "100%",
+        borderRadius: 53,
     },
 
     cameraIcon: {

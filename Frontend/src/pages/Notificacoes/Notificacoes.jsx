@@ -1,152 +1,125 @@
-import React from "react";
-import { View, Text, ScrollView } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import styles from "./NotificacoesStyle";
+import {
+    View,
+    Text,
+    ScrollView,
+    SafeAreaView,
+} from "react-native"
 
-export default function Notificacao() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.titulo} allowFontScaling={false}>
-        Notificações
-      </Text>
+import { Ionicons } from "@expo/vector-icons"
 
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.lista}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.card}>
-          <Ionicons
-            name="heart-outline"
-            size={26}
-            color="#460303"
-            style={styles.icone}
-          />
+import styles from "./NotificacoesStyle"
 
-          <View style={styles.conteudo}>
-            <Text style={styles.texto} allowFontScaling={false}>
-              <Text style={styles.negrito} allowFontScaling={false}>
-                João Silva
-              </Text>
-              {" curtiu sua publicação"}
-            </Text>
+import { useUsuario } from "../../contexts/UsuarioContext"
 
-            <Text style={styles.horario} allowFontScaling={false}>
-              10:30
-            </Text>
-          </View>
-        </View>
+export default function Notificacoes() {
+    const { notificacoes } = useUsuario()
 
-        <View style={styles.card}>
-          <Ionicons
-            name="chatbubble-outline"
-            size={26}
-            color="#460303"
-            style={styles.icone}
-          />
+    return (
+        <SafeAreaView style={styles.container}>
+            <View style={styles.header}>
+                <Text style={styles.titulo}>
+                    Notificações
+                </Text>
+            </View>
 
-          <View style={styles.conteudo}>
-            <Text style={styles.texto} allowFontScaling={false}>
-              <Text style={styles.negrito} allowFontScaling={false}>
-                João Silva
-              </Text>
-              {" comentou sua publicação"}
-            </Text>
+            <ScrollView
+                style={styles.scroll}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={
+                    styles.lista
+                }
+            >
+                {notificacoes.map(
+                    notificacao => {
+                        let icone =
+                            "person-add-outline"
 
-            <Text style={styles.horario} allowFontScaling={false}>
-              10:30
-            </Text>
-          </View>
-        </View>
+                        if (
+                            notificacao.tipo ===
+                            "curtida"
+                        ) {
+                            icone =
+                                "heart-outline"
+                        }
 
-        <View style={styles.card}>
-          <Ionicons
-            name="person-add-outline"
-            size={26}
-            color="#460303"
-            style={styles.icone}
-          />
+                        if (
+                            notificacao.tipo ===
+                            "comentario"
+                        ) {
+                            icone =
+                                "chatbubble-outline"
+                        }
 
-          <View style={styles.conteudo}>
-            <Text style={styles.texto} allowFontScaling={false}>
-              <Text style={styles.negrito} allowFontScaling={false}>
-                João Silva
-              </Text>
-              {" começou a seguir você"}
-            </Text>
+                        if (
+                            notificacao.tipo ===
+                            "publicacao"
+                        ) {
+                            icone =
+                                "paper-plane"
+                        }
 
-            <Text style={styles.horario} allowFontScaling={false}>
-              10:30
-            </Text>
-          </View>
-        </View>
+                        return (
+                            <View
+                                key={
+                                    notificacao.id
+                                }
+                                style={
+                                    styles.card
+                                }
+                            >
+                                <View
+                                    style={
+                                        styles.icone
+                                    }
+                                >
+                                    <Ionicons
+                                        name={
+                                            icone
+                                        }
+                                        size={40}
+                                        color="#460303"
+                                    />
+                                </View>
 
-        <View style={styles.card}>
-          <Ionicons
-            name="person-add-outline"
-            size={26}
-            color="#460303"
-            style={styles.icone}
-          />
+                                <View
+                                    style={
+                                        styles.conteudo
+                                    }
+                                >
+                                    <Text
+                                        style={
+                                            styles.texto
+                                        }
+                                    >
+                                        <Text
+                                            style={
+                                                styles.nome
+                                            }
+                                        >
+                                            {
+                                                notificacao.nome
+                                            }
+                                        </Text>{" "}
+                                        {
+                                            notificacao.texto
+                                        }
+                                    </Text>
 
-          <View style={styles.conteudo}>
-            <Text style={styles.texto} allowFontScaling={false}>
-              <Text style={styles.negrito} allowFontScaling={false}>
-                João Silva
-              </Text>
-              {" começou a seguir você"}
-            </Text>
-
-            <Text style={styles.horario} allowFontScaling={false}>
-              10:30
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.card}>
-          <Ionicons
-            name="person-add-outline"
-            size={26}
-            color="#460303"
-            style={styles.icone}
-          />
-
-          <View style={styles.conteudo}>
-            <Text style={styles.texto} allowFontScaling={false}>
-              <Text style={styles.negrito} allowFontScaling={false}>
-                João Silva
-              </Text>
-              {" começou a seguir você"}
-            </Text>
-
-            <Text style={styles.horario} allowFontScaling={false}>
-              10:30
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.card}>
-          <Ionicons
-            name="chatbubble-outline"
-            size={26}
-            color="#460303"
-            style={styles.icone}
-          />
-
-          <View style={styles.conteudo}>
-            <Text style={styles.texto} allowFontScaling={false}>
-              <Text style={styles.negrito} allowFontScaling={false}>
-                João Silva
-              </Text>
-              {" comentou sua publicação"}
-            </Text>
-
-            <Text style={styles.horario} allowFontScaling={false}>
-              10:30
-            </Text>
-          </View>
-        </View>
-      </ScrollView>
-    </View>
-  );
+                                    <Text
+                                        style={
+                                            styles.data
+                                        }
+                                    >
+                                        {
+                                            notificacao.data
+                                        }
+                                    </Text>
+                                </View>
+                            </View>
+                        )
+                    }
+                )}
+            </ScrollView>
+        </SafeAreaView>
+    )
 }

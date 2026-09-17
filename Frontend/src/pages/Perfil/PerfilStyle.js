@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from "react-native"
 
 const { width } = Dimensions.get("window")
 
-const GRID_PADDING = 22
+const GRID_PADDING = 14
 const GRID_GAP = 8
 
 const PHOTO_SIZE =
@@ -11,16 +11,16 @@ const PHOTO_SIZE =
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#FFFFFF",
     },
 
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#FFFFFF",
     },
 
     scrollContent: {
-        paddingBottom: 10,
+        paddingBottom: 25,
     },
 
     header: {
@@ -33,12 +33,14 @@ const styles = StyleSheet.create({
 
     headerEspaco: {
         width: 32,
+        height: 32,
     },
 
     headerTitle: {
-        fontSize: 18,
+        fontSize: 19,
         fontFamily: "Inter_600SemiBold",
         color: "#650000",
+        letterSpacing: 0,
     },
 
     settingsButton: {
@@ -50,35 +52,47 @@ const styles = StyleSheet.create({
 
     profileArea: {
         alignItems: "center",
-        marginTop: 2,
+        marginTop: 8,
+    },
+
+    profileImageWrapper: {
+        position: "relative",
+        width: 105,
+        height: 105,
+        alignItems: "center",
+        justifyContent: "center",
     },
 
     profileImage: {
-        width: 86,
-        height: 86,
-        borderRadius: 45,
+        width: 105,
+        height: 105,
+        borderRadius: 53,
         borderWidth: 2,
         borderColor: "#650000",
-        overflow: "visible",
-        backgroundColor: "#eee",
+        backgroundColor: "#EEEEEE",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
     },
 
     profileImageContent: {
         width: "100%",
         height: "100%",
-        borderRadius: 45,
+        borderRadius: 53,
+        alignItems: "center",
+        justifyContent: "center",
     },
 
     lapizIcon: {
         position: "absolute",
-        right: -5,
-        bottom: -5,
-        width: 30,
-        height: 30,
-        borderRadius: 15,
-        backgroundColor: "#fff",
-        borderWidth: 1.5,
-        borderColor: "#650000",
+        right: -2,
+        bottom: 2,
+        width: 34,
+        height: 34,
+        borderRadius: 17,
+        backgroundColor: "#FFFFFF",
+        borderWidth: 2,
+        borderColor: "#460303",
         alignItems: "center",
         justifyContent: "center",
     },
@@ -87,26 +101,29 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: "Inter_600SemiBold",
         color: "#650000",
-        marginTop: 10,
+        marginTop: 12,
     },
 
     username: {
         fontSize: 15,
-        color: "#aaa",
-        marginTop: 2,
+        color: "#AAAAAA",
+        marginTop: 3,
         fontFamily: "Inter_400Regular",
     },
 
     stats: {
+        width: "100%",
         flexDirection: "row",
         justifyContent: "space-around",
-        marginTop: 20,
-        paddingHorizontal: 20,
+        alignItems: "center",
+        marginTop: 22,
+        paddingHorizontal: 18,
     },
 
     stat: {
         alignItems: "center",
-        minWidth: 80,
+        justifyContent: "center",
+        minWidth: 85,
     },
 
     statNumber: {
@@ -117,18 +134,25 @@ const styles = StyleSheet.create({
 
     statLabel: {
         fontSize: 12,
-        color: "#aaa",
-        marginTop: 4,
+        color: "#AAAAAA",
+        marginTop: 5,
         fontFamily: "Inter_400Regular",
+    },
+
+    descricaoArea: {
+        width: "100%",
+        paddingHorizontal: 25,
+        marginTop: 25,
+        marginBottom: 22,
+        alignItems: "center",
     },
 
     bio: {
         fontSize: 13,
-        color: "#222",
-        marginHorizontal: 25,
-        marginTop: 16,
-        lineHeight: 16,
+        color: "#222222",
+        lineHeight: 18,
         fontFamily: "Inter_400Regular",
+        textAlign: "center",
     },
 
     tabs: {
@@ -136,13 +160,13 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         flexDirection: "row",
         alignItems: "center",
-        height: 42,
-        marginTop: 20,
+        height: 46,
+        marginTop: 4,
     },
 
     tab: {
         width: "50%",
-        height: 42,
+        height: 46,
         alignItems: "center",
         justifyContent: "center",
     },
@@ -164,20 +188,28 @@ const styles = StyleSheet.create({
     },
 
     tabLinhaInativa: {
-        backgroundColor: "#e0e0e0",
+        backgroundColor: "#E0E0E0",
     },
 
     grid: {
         flexDirection: "row",
         flexWrap: "wrap",
         paddingHorizontal: GRID_PADDING,
-        paddingTop: 10,
+        paddingTop: 18,
         gap: GRID_GAP,
     },
 
     photoPlaceholder: {
         width: PHOTO_SIZE,
         height: PHOTO_SIZE,
+        borderRadius: 6,
+        overflow: "hidden",
+        backgroundColor: "#F1F1F1",
+    },
+
+    gridImage: {
+        width: "100%",
+        height: "100%",
         borderRadius: 6,
     },
 })

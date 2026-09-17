@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Platform } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
 const { width } = Dimensions.get('window')
 
@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: cores.fundo,
         paddingHorizontal: LATERAL,
-        paddingTop: Platform.OS === 'ios' ? 20 : 30,
     },
 
     topo: {
@@ -40,6 +39,7 @@ export const styles = StyleSheet.create({
     iconeVoltar: {
         width: 22,
         height: 22,
+        tintColor: cores.vinho,
     },
 
     titulo: {
@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
     label: {
         fontSize: 14,
         fontFamily: 'Inter_600SemiBold',
-        color: cores.preto,
+        color: cores.vinho,
         marginBottom: 8,
     },
 
@@ -123,6 +123,12 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Inter_600SemiBold',
     },
+
+    textoErro: {
+    color: '#E53935',
+    fontSize: 13,
+    marginBottom: 8,
+},
 
     divisor: {
         flexDirection: 'row',
