@@ -24,6 +24,7 @@ import NovaPublicacao from "./src/pages/NovaPublicacao/NovaPublicacao"
 import Publicacao from "./src/pages/Publicacao/Publicacao"
 import Notificacao from "./src/pages/Notificacoes/Notificacoes"
 import Perfil from "./src/pages/Perfil/Perfil"
+import PerfilUsuario from "./src/pages/PerfilUsuario/PerfilUsuario"
 import EditarPerfil from "./src/pages/EditarPerfil/EditarPerfil"
 import Configuracoes from "./src/pages/Configuracoes/Configuracoes"
 import Footer from "./src/components/Footer/Footer"
@@ -48,6 +49,11 @@ function AppInterno() {
     const [
         publicacaoAberta,
         setPublicacaoAberta,
+    ] = useState(null)
+
+    const [
+        perfilUsuarioAberto,
+        setPerfilUsuarioAberto,
     ] = useState(null)
 
     const [
@@ -249,6 +255,40 @@ function AppInterno() {
         )
     }
 
+    if (perfilUsuarioAberto) {
+        return (
+            <PerfilUsuario
+                route={{
+                    params:
+                        perfilUsuarioAberto,
+                }}
+                navigation={{
+                    goBack: () =>
+                        setPerfilUsuarioAberto(
+                            null
+                        ),
+                    navigate: (
+                        tela,
+                        dados
+                    ) => {
+                        if (
+                            tela ===
+                            "DPublicacao"
+                        ) {
+                            setPerfilUsuarioAberto(
+                                null
+                            )
+
+                            setPublicacaoAberta(
+                                dados
+                            )
+                        }
+                    },
+                }}
+            />
+        )
+    }
+
     if (publicacaoAberta) {
         return (
             <Publicacao
@@ -261,6 +301,11 @@ function AppInterno() {
                     )
                     setAba("Inicio")
                 }}
+                onAbrirPerfil={dados =>
+                    setPerfilUsuarioAberto(
+                        dados
+                    )
+                }
             />
         )
     }
@@ -299,6 +344,11 @@ function AppInterno() {
                                 publicacao
                             )
                         }
+                    }
+                    onAbrirPerfil={dados =>
+                        setPerfilUsuarioAberto(
+                            dados
+                        )
                     }
                 />
             )}

@@ -4,29 +4,192 @@
       "nome": "felipe",
       "email": "felipe@gmail.com",
       "senha": "123456",
-      "username": "felipefelipe",
+      "username": "f.silva00",
       "bio": "dev",
       "avatar": null,
-      "seguidores": [],
-      "seguindo": [],
+      "seguidores": [
+        "2"
+      ],
+      "seguindo": [
+        "2",
+        "nome:Lucas Mendes",
+        "nome:Mariana Costa",
+        "nome:Beatriz Oliveira",
+        "nome:Gabriel Souza"
+      ],
       "publicacoes": [],
       "id": 1,
-      "usuario": "felipefelipe"
+      "usuario": "f.silva00",
+      "criadaEm": "2026-09-29T12:06:31.815Z"
     },
     {
       "nome": "Luis Oliva",
       "email": "lfernandooliva@icloud.com",
       "senha": "loliva10",
-      "username": "@luis.oliva",
-      "bio": "",
-      "avatar": null,
-      "seguidores": [],
-      "seguindo": [],
+      "username": "l.folivajdjd",
+      "bio": "💍",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/6E5BA9CD-3110-427F-AE7B-9B963E7B378D.jpg",
+      "seguidores": [
+        "1"
+      ],
+      "seguindo": [
+        "nome:Lucas Mendes",
+        "nome:Rafael Almeida",
+        "nome:Ana Clara Santos",
+        "nome:Mariana Costa",
+        "1"
+      ],
       "publicacoes": [],
-      "id": 2
+      "id": 2,
+      "usuario": "l.folivajdjd",
+      "criadaEm": "2026-09-29T11:59:30.103Z"
     }
   ],
-  "publicacoes": [],
+  "publicacoes": [
+    {
+      "id": "1790687478717",
+      "texto": "Vamo vigia que o mundo tá cheio de coisas erradas👀😢\n\n#ajudanois",
+      "imagem": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/26433639-9518-4E3E-896A-35BBD8AA9622.png",
+      "localizacao": {
+        "latitude": -23.615042689643133,
+        "longitude": -46.57084524412549,
+        "rua": "Rua Niterói",
+        "numero": "95–205",
+        "cidade": "São Caetano do Sul",
+        "estado": "SP",
+        "pais": "Brasil"
+      },
+      "sentimento": {
+        "emoji": "😊",
+        "nome": "Feliz"
+      },
+      "data": "2026-09-29T13:11:18.717Z",
+      "curtidas": 0,
+      "comentarios": 0,
+      "nome": "Luis Oliva",
+      "username": "l.foliva",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D3011EF-6647-48EA-8A24-E7D2E25B947E.jpg",
+      "usuarioId": 2
+    },
+    {
+      "id": "1790687751150",
+      "texto": "Guete💛",
+      "imagem": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/514DF97C-2DF2-4936-A52E-98F7CED1E87F.jpg",
+      "localizacao": null,
+      "sentimento": {
+        "emoji": "😌",
+        "nome": "Tranquilo"
+      },
+      "data": "2026-09-29T13:15:51.150Z",
+      "curtidas": 0,
+      "comentarios": 0,
+      "nome": "Luis Oliva",
+      "username": "l.foliva",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D3011EF-6647-48EA-8A24-E7D2E25B947E.jpg",
+      "usuarioId": 2
+    },
+    {
+      "id": "1790688222681",
+      "texto": "Só pedreiro depois da obra😂",
+      "imagem": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/605E1442-A48C-456C-AC0B-7CA8AA9FFD72.jpg",
+      "localizacao": {
+        "latitude": -23.615041493212402,
+        "longitude": -46.570843580301165,
+        "rua": "Rua Niterói",
+        "numero": "95–205",
+        "cidade": "São Caetano do Sul",
+        "estado": "SP",
+        "pais": "Brasil"
+      },
+      "sentimento": {
+        "emoji": "😊",
+        "nome": "Feliz"
+      },
+      "data": "2026-09-29T13:23:42.681Z",
+      "curtidas": 0,
+      "comentarios": 0,
+      "nome": "Luis Oliva",
+      "username": "l.foliva",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D3011EF-6647-48EA-8A24-E7D2E25B947E.jpg",
+      "usuarioId": 2
+    },
+    {
+      "id": "1790688328730",
+      "texto": "Faz meu churrasco e não reclama😅",
+      "imagem": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/FFC58EF9-221E-4AE1-A634-3EA39B745D59.jpg",
+      "localizacao": null,
+      "sentimento": {
+        "emoji": "😌",
+        "nome": "Tranquilo"
+      },
+      "data": "2026-09-29T13:25:28.730Z",
+      "curtidas": 0,
+      "comentarios": 0,
+      "nome": "Luis Oliva",
+      "username": "l.foliva",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D3011EF-6647-48EA-8A24-E7D2E25B947E.jpg",
+      "usuarioId": 2
+    },
+    {
+      "id": "1790688619814",
+      "texto": "Estado do samba e da alegria, salve Jorge!\n\n#sambaévida",
+      "imagem": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/C5B0C771-C9F2-43B1-8774-0771D54C1966.jpg",
+      "localizacao": null,
+      "sentimento": {
+        "emoji": "😊",
+        "nome": "Feliz"
+      },
+      "data": "2026-09-29T13:30:19.814Z",
+      "curtidas": 0,
+      "comentarios": 0,
+      "nome": "Luis Oliva",
+      "username": "l.foliva",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D3011EF-6647-48EA-8A24-E7D2E25B947E.jpg",
+      "usuarioId": 2
+    },
+    {
+      "id": "1790699208501",
+      "texto": "Vou te buscar😍🤍",
+      "imagem": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/873E1411-AC95-4C07-BA79-12E78B19F603.jpg",
+      "localizacao": null,
+      "sentimento": {
+        "emoji": "😌",
+        "nome": "Tranquilo"
+      },
+      "data": "2026-09-29T16:26:48.501Z",
+      "curtidas": 0,
+      "comentarios": 0,
+      "nome": "Luis Oliva",
+      "username": "l.foliva",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D3011EF-6647-48EA-8A24-E7D2E25B947E.jpg",
+      "usuarioId": 2
+    },
+    {
+      "id": "1790708637852",
+      "texto": "Teste",
+      "imagem": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/C4BB6397-A975-4246-BD6D-9EB74632A517.jpg",
+      "localizacao": {
+        "latitude": -23.615040875852422,
+        "longitude": -46.57096353282611,
+        "rua": "Rua Niterói",
+        "numero": "95–205",
+        "cidade": "São Caetano do Sul",
+        "estado": "SP",
+        "pais": "Brasil"
+      },
+      "sentimento": {
+        "emoji": "😊",
+        "nome": "Feliz"
+      },
+      "data": "2026-09-29T19:03:57.852Z",
+      "curtidas": 0,
+      "comentarios": 0,
+      "nome": "Luis Oliva",
+      "username": "l.foliva",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D97A3CB-C813-482F-900A-1C8A24A045C4.jpg",
+      "usuarioId": 2
+    }
+  ],
   "comentarios": [
     {
       "id": "comentario-1789667920525",
@@ -43,6 +206,94 @@
       "texto": "lindo",
       "avatar": null,
       "data": "2026-09-17T17:58:46.447Z"
+    },
+    {
+      "id": "comentario-1790681457872",
+      "publicacaoId": "1790681354486",
+      "nome": "felipe",
+      "texto": "ola tudo bem?",
+      "avatar": null,
+      "data": "2026-09-29T11:30:57.872Z"
+    },
+    {
+      "id": "comentario-1790681614806",
+      "publicacaoId": "1790681354486",
+      "nome": "felipe",
+      "texto": "Fsg",
+      "avatar": null,
+      "data": "2026-09-29T11:33:34.806Z"
+    },
+    {
+      "id": "comentario-1790681616142",
+      "publicacaoId": "1790681354486",
+      "nome": "felipe",
+      "texto": "Faz",
+      "avatar": null,
+      "data": "2026-09-29T11:33:36.142Z"
+    },
+    {
+      "id": "comentario-1790681693529",
+      "publicacaoId": "1790681354486",
+      "nome": "felipe",
+      "texto": "Olá qq isso",
+      "avatar": null,
+      "data": "2026-09-29T11:34:53.529Z"
+    },
+    {
+      "id": "comentario-1790684150448",
+      "publicacaoId": "1790683421095",
+      "nome": "Luis Oliva",
+      "texto": "guf",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D3011EF-6647-48EA-8A24-E7D2E25B947E.jpg",
+      "data": "2026-09-29T12:15:50.448Z"
+    },
+    {
+      "id": "comentario-1790689194959",
+      "publicacaoId": "3",
+      "nome": "Luis Oliva",
+      "texto": "lugar perfeito",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D3011EF-6647-48EA-8A24-E7D2E25B947E.jpg",
+      "data": "2026-09-29T13:39:54.959Z"
+    },
+    {
+      "id": "comentario-1790689771134",
+      "publicacaoId": "1790687394681",
+      "nome": "felipe",
+      "texto": "parabens, muito lindos😍",
+      "avatar": null,
+      "data": "2026-09-29T13:49:31.134Z"
+    },
+    {
+      "id": "comentario-1790706959754",
+      "publicacaoId": "1790687478717",
+      "nome": "Luis Oliva",
+      "texto": "oii",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D97A3CB-C813-482F-900A-1C8A24A045C4.jpg",
+      "data": "2026-09-29T18:35:59.754Z"
+    },
+    {
+      "id": "comentario-1790706972657",
+      "publicacaoId": "1790687478717",
+      "nome": "Luis Oliva",
+      "texto": "😂😂",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D97A3CB-C813-482F-900A-1C8A24A045C4.jpg",
+      "data": "2026-09-29T18:36:12.657Z"
+    },
+    {
+      "id": "comentario-1790706984517",
+      "publicacaoId": "1790687478717",
+      "nome": "Luis Oliva",
+      "texto": "triste situação😢",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D97A3CB-C813-482F-900A-1C8A24A045C4.jpg",
+      "data": "2026-09-29T18:36:24.517Z"
+    },
+    {
+      "id": "comentario-1790708660503",
+      "publicacaoId": "1790708637852",
+      "nome": "Luis Oliva",
+      "texto": "Olha so a mayara",
+      "avatar": "file:///var/mobile/Containers/Data/Application/13C6AB1E-EC1F-41BF-89E8-B6B2B9BFD6C9/Library/Caches/ImagePicker/1D97A3CB-C813-482F-900A-1C8A24A045C4.jpg",
+      "data": "2026-09-29T19:04:20.503Z"
     }
   ],
   "notificacoes": [
@@ -61,35 +312,142 @@
       "texto": "comentou uma publicação.",
       "data": "14:58",
       "publicacaoId": "3"
+    },
+    {
+      "id": "publicacao-1790687478717",
+      "tipo": "publicacao",
+      "nome": "Sua publicação",
+      "texto": "foi publicada com sucesso.",
+      "data": "10:11",
+      "publicacaoId": "1790687478717"
+    },
+    {
+      "id": "publicacao-1790687751150",
+      "tipo": "publicacao",
+      "nome": "Sua publicação",
+      "texto": "foi publicada com sucesso.",
+      "data": "10:15",
+      "publicacaoId": "1790687751150"
+    },
+    {
+      "id": "publicacao-1790688222681",
+      "tipo": "publicacao",
+      "nome": "Sua publicação",
+      "texto": "foi publicada com sucesso.",
+      "data": "10:23",
+      "publicacaoId": "1790688222681"
+    },
+    {
+      "id": "publicacao-1790688328730",
+      "tipo": "publicacao",
+      "nome": "Sua publicação",
+      "texto": "foi publicada com sucesso.",
+      "data": "10:25",
+      "publicacaoId": "1790688328730"
+    },
+    {
+      "id": "publicacao-1790688619814",
+      "tipo": "publicacao",
+      "nome": "Sua publicação",
+      "texto": "foi publicada com sucesso.",
+      "data": "10:30",
+      "publicacaoId": "1790688619814"
+    },
+    {
+      "id": "comentario-notificacao-1790689195170",
+      "tipo": "comentario",
+      "nome": "Luis Oliva",
+      "texto": "comentou uma publicação.",
+      "data": "10:39",
+      "publicacaoId": "3"
+    },
+    {
+      "paraId": 2,
+      "deId": 1,
+      "nome": "felipe",
+      "tipo": "seguir",
+      "texto": "começou a seguir você.",
+      "publicacaoId": null,
+      "data": "13:16",
+      "criadaEm": "2026-09-29T16:16:49.619Z",
+      "id": "3k8TY_B"
+    },
+    {
+      "id": "publicacao-1790699208501",
+      "paraId": 2,
+      "deId": 2,
+      "tipo": "publicacao",
+      "nome": "Sua publicação",
+      "texto": "foi publicada com sucesso.",
+      "data": "13:26",
+      "criadaEm": "2026-09-29T16:26:48.501Z",
+      "publicacaoId": "1790699208501"
+    },
+    {
+      "id": "publicacao-1790708637852",
+      "paraId": 2,
+      "deId": 2,
+      "tipo": "publicacao",
+      "nome": "Sua publicação",
+      "texto": "foi publicada com sucesso.",
+      "data": "16:03",
+      "criadaEm": "2026-09-29T19:03:57.852Z",
+      "publicacaoId": "1790708637852"
+    },
+    {
+      "paraId": 1,
+      "deId": 2,
+      "nome": "Luis Oliva",
+      "tipo": "seguir",
+      "texto": "começou a seguir você.",
+      "publicacaoId": null,
+      "data": "16:05",
+      "criadaEm": "2026-09-29T19:05:10.102Z",
+      "id": "aqlZNLI"
     }
   ],
   "salvos": [
     {
-      "id": "salvo-1789667812866",
-      "publicacaoId": "1",
-      "usuarioId": 1
-    },
-    {
-      "id": "salvo-1789667814750",
+      "id": "salvo-1790683868712",
       "publicacaoId": "2",
       "usuarioId": 1
     },
     {
-      "id": "salvo-1789667815901",
-      "publicacaoId": "3",
-      "usuarioId": 1
+      "id": "salvo-1790708667230",
+      "publicacaoId": "1790708637852",
+      "usuarioId": "2"
     }
   ],
   "curtidas": [
     {
-      "id": "curtida-1789667812131",
+      "id": "curtida-1789667929094",
+      "publicacaoId": "3",
+      "usuarioId": 1
+    },
+    {
+      "id": "curtida-1790683729654",
       "publicacaoId": "1",
       "usuarioId": 1
     },
     {
-      "id": "curtida-1789667929094",
-      "publicacaoId": "3",
-      "usuarioId": 1
+      "id": "curtida-1790688903437",
+      "publicacaoId": "4",
+      "usuarioId": 2
+    },
+    {
+      "id": "curtida-1790689659028",
+      "publicacaoId": "1",
+      "usuarioId": "2"
+    },
+    {
+      "id": "curtida-1790706956891",
+      "publicacaoId": "1790687478717",
+      "usuarioId": "2"
+    },
+    {
+      "id": "curtida-1790708650094",
+      "publicacaoId": "1790708637852",
+      "usuarioId": "2"
     }
   ]
 }

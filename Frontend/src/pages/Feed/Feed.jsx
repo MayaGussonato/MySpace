@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
     View,
     Text,
@@ -7,6 +8,7 @@ import {
     StatusBar,
     SafeAreaView,
     Alert,
+    TextInput,
 } from "react-native"
 
 import { Feather, Ionicons } from "@expo/vector-icons"
@@ -184,10 +186,10 @@ function Publicacao({
                         <Image
                             source={
                                 typeof item.avatar ===
-                                "string"
+                                    "string"
                                     ? {
-                                          uri: item.avatar,
-                                      }
+                                        uri: item.avatar,
+                                    }
                                     : item.avatar
                             }
                             style={
@@ -272,10 +274,10 @@ function Publicacao({
                 <Image
                     source={
                         typeof item.imagem ===
-                        "string"
+                            "string"
                             ? {
-                                  uri: item.imagem,
-                              }
+                                uri: item.imagem,
+                            }
                             : item.imagem
                     }
                     style={{
@@ -428,15 +430,125 @@ function Publicacao({
     )
 }
 
+function ItemUsuario({
+    usuario,
+    onPress,
+}) {
+    const arroba = (
+        usuario.username ||
+        usuario.usuario ||
+        ""
+    ).replace(/^@/, "")
+
+    return (
+        <Pressable
+            style={styles.itemUsuario}
+            onPress={onPress}
+        >
+            <View
+                style={
+                    styles.avatarUsuario
+                }
+            >
+                {usuario.avatar ? (
+                    <Image
+                        source={
+                            typeof usuario.avatar ===
+                                "string"
+                                ? {
+                                    uri: usuario.avatar,
+                                }
+                                : usuario.avatar
+                        }
+                        style={
+                            styles.avatarImagem
+                        }
+                        resizeMode="cover"
+                    />
+                ) : (
+                    <View
+                        style={{
+                            flex: 1,
+                            alignItems:
+                                "center",
+                            justifyContent:
+                                "center",
+                            backgroundColor:
+                                "#E0C98F",
+                        }}
+                    >
+                        <Feather
+                            name="user"
+                            size={22}
+                            color={
+                                cores.vinho
+                            }
+                        />
+                    </View>
+                )}
+            </View>
+
+            <View
+                style={
+                    styles.infoBuscaUsuario
+                }
+            >
+                <Text
+                    style={
+                        styles.nomeUsuarioBusca
+                    }
+                >
+                    {usuario.nome ||
+                        "Usuário"}
+                </Text>
+
+                {arroba ? (
+                    <Text
+                        style={
+                            styles.arrobaUsuarioBusca
+                        }
+                    >
+                        @{arroba}
+                    </Text>
+                ) : null}
+            </View>
+
+            <Feather
+                name="chevron-right"
+                size={20}
+                color={cores.vinho}
+            />
+        </Pressable>
+    )
+}
+
+function normalizar(texto) {
+    return String(texto || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+}
+
 export default function Feed({
     onAbrirPublicacao,
     onAbrirNotificacoes,
     onAbrirCriar,
     onEditarPublicacao,
+    onAbrirPerfil,
 }) {
     const {
         publicacoes: novasPublicacoes,
+        usuarios,
+        usuario: usuarioLogado,
+        carregarUsuarios,
     } = useUsuario()
+
+    const [pesquisaAberta, setPesquisaAberta] =
+        useState(false)
+
+    const [termo, setTermo] =
+        useState("")
 
     const publicacoesIniciais =
         PUBLICACOES || []
@@ -465,6 +577,63 @@ export default function Feed({
         ...publicacoesIniciais,
     ]
 
+    const termoNormalizado =
+        normalizar(termo)
+
+    const resultados =
+        termoNormalizado
+            ? (usuarios || []).filter(usuario => {
+                const ehVoce =
+                    usuarioLogado &&
+                    String(usuario.id) ===
+                    String(usuarioLogado.id)
+
+                if (ehVoce) return false
+
+                return (
+                    normalizar(
+                        usuario.nome
+                    ).includes(
+                        termoNormalizado
+                    ) ||
+                    normalizar(
+                        usuario.username ||
+                        usuario.usuario
+                    ).includes(
+                        termoNormalizado
+                    )
+                )
+            })
+            : []
+
+    function alternarPesquisa() {
+        if (pesquisaAberta) {
+            setTermo("")
+        } else {
+            carregarUsuarios()
+        }
+
+        setPesquisaAberta(
+            !pesquisaAberta
+        )
+    }
+
+    function abrirPerfil(usuario) {
+        setTermo("")
+        setPesquisaAberta(false)
+
+        if (onAbrirPerfil) {
+            onAbrirPerfil({
+                ...usuario,
+                usuarioId: usuario.id,
+            })
+        }
+    }
+
+    const mostrandoBusca =
+        pesquisaAberta &&
+        termoNormalizado.length > 0
+
     return (
         <SafeAreaView
             style={styles.container}
@@ -485,53 +654,167 @@ export default function Feed({
                     MySpace
                 </Text>
 
-                <Pressable
+                <View
                     style={
-                        styles.botaoSino
-                    }
-                    onPress={
-                        onAbrirNotificacoes
+                        styles.acoesHeader
                     }
                 >
-                    <Ionicons
-                        name="notifications-outline"
-                        size={25}
+                    <Pressable
+                        style={
+                            styles.botaoSino
+                        }
+                        onPress={
+                            alternarPesquisa
+                        }
+                    >
+                        <Ionicons
+                            name={
+                                pesquisaAberta
+                                    ? "close-outline"
+                                    : "search-outline"
+                            }
+                            size={25}
+                            color={
+                                cores.vinho
+                            }
+                        />
+                    </Pressable>
+
+                    <Pressable
+                        style={
+                            styles.botaoSino
+                        }
+                        onPress={
+                            onAbrirNotificacoes
+                        }
+                    >
+                        <Ionicons
+                            name="notifications-outline"
+                            size={25}
+                            color={
+                                cores.vinho
+                            }
+                        />
+                    </Pressable>
+                </View>
+            </View>
+
+            {pesquisaAberta ? (
+                <View
+                    style={
+                        styles.caixaPesquisa
+                    }
+                >
+                    <Feather
+                        name="search"
+                        size={18}
                         color={
                             cores.vinho
                         }
                     />
-                </Pressable>
-            </View>
 
-            <FlatList
-                data={
-                    todasPublicacoes
-                }
-                keyExtractor={item =>
-                    item.id.toString()
-                }
-                renderItem={({
-                    item,
-                }) => (
-                    <Publicacao
-                        item={item}
-                        onPress={() =>
-                            onAbrirPublicacao(
-                                item
-                            )
+                    <TextInput
+                        style={
+                            styles.inputPesquisa
                         }
-                        onEditar={
-                            onEditarPublicacao
+                        placeholder="Pesquisar perfis"
+                        placeholderTextColor={
+                            cores.cinza
                         }
+                        value={termo}
+                        onChangeText={
+                            setTermo
+                        }
+                        autoFocus
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        returnKeyType="search"
                     />
-                )}
-                showsVerticalScrollIndicator={
-                    false
-                }
-                contentContainerStyle={
-                    styles.lista
-                }
-            />
+
+                    {termo.length > 0 ? (
+                        <Pressable
+                            onPress={() =>
+                                setTermo("")
+                            }
+                        >
+                            <Feather
+                                name="x-circle"
+                                size={18}
+                                color={
+                                    cores.cinza
+                                }
+                            />
+                        </Pressable>
+                    ) : null}
+                </View>
+            ) : null}
+
+            {mostrandoBusca ? (
+                <FlatList
+                    data={resultados}
+                    keyExtractor={item =>
+                        item.id.toString()
+                    }
+                    renderItem={({
+                        item,
+                    }) => (
+                        <ItemUsuario
+                            usuario={item}
+                            onPress={() =>
+                                abrirPerfil(
+                                    item
+                                )
+                            }
+                        />
+                    )}
+                    keyboardShouldPersistTaps="handled"
+                    showsVerticalScrollIndicator={
+                        false
+                    }
+                    contentContainerStyle={
+                        styles.listaBusca
+                    }
+                    ListEmptyComponent={
+                        <Text
+                            style={
+                                styles.buscaVazia
+                            }
+                        >
+                            Nenhum perfil encontrado
+                        </Text>
+                    }
+                />
+            ) : (
+                <FlatList
+                    data={
+                        todasPublicacoes
+                    }
+                    keyExtractor={item =>
+                        item.id.toString()
+                    }
+                    renderItem={({
+                        item,
+                    }) => (
+                        <Publicacao
+                            item={item}
+                            onPress={() =>
+                                onAbrirPublicacao(
+                                    item
+                                )
+                            }
+                            onEditar={
+                                onEditarPublicacao
+                            }
+                        />
+                    )}
+                    showsVerticalScrollIndicator={
+                        false
+                    }
+                    contentContainerStyle={
+                        styles.lista
+                    }
+                />
+            )}
 
             <Pressable
                 style={styles.fab}

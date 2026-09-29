@@ -15,16 +15,54 @@ import styles from "./PerfilStyle"
 
 import { useUsuario } from "../../contexts/UsuarioContext"
 
+function contar(valor) {
+    if (Array.isArray(valor)) {
+        return valor.length
+    }
+
+    return Number(valor) || 0
+}
+
+function normalizarId(valor) {
+    return valor === undefined || valor === null
+        ? ""
+        : valor.toString()
+}
+
 export default function Perfil({ navigation }) {
     const {
         usuario,
         publicacoes,
         salvos,
+        obterQuantidadeSeguidores,
     } = useUsuario()
 
     const [abaSelecionada, setAbaSelecionada] = useState("fotos")
 
-    const minhasPublicacoes = usuario?.publicacoes || []
+    const meuId = normalizarId(usuario?.id)
+    const meuEmail = normalizarId(usuario?.email)
+
+    const minhasPublicacoes = (publicacoes || []).filter(item => {
+        const dono = normalizarId(item.usuarioId)
+
+        if (!dono) {
+            return false
+        }
+
+        return dono === meuId || dono === meuEmail
+    })
+
+    const quantidadeSeguidores = obterQuantidadeSeguidores({
+        usuarioId: usuario?.id,
+    })
+
+    const quantidadeSeguindo = contar(usuario?.seguindo)
+
+    const nomeUsuario = (
+        usuario?.username ||
+        usuario?.usuario ||
+        ""
+    ).replace(/^@/, "")
 
     const publicacoesSalvas = (publicacoes || []).filter(
         item => salvos.includes(item.id)
@@ -141,9 +179,9 @@ export default function Perfil({ navigation }) {
                         </Text>
                     ) : null}
 
-                    {usuario?.usuario ? (
+                    {nomeUsuario ? (
                         <Text style={styles.username}>
-                            @{usuario.usuario}
+                            @{nomeUsuario}
                         </Text>
                     ) : null}
                 </View>
@@ -161,7 +199,7 @@ export default function Perfil({ navigation }) {
 
                     <View style={styles.stat}>
                         <Text style={styles.statNumber}>
-                            845
+                            {quantidadeSeguidores}
                         </Text>
 
                         <Text style={styles.statLabel}>
@@ -171,7 +209,7 @@ export default function Perfil({ navigation }) {
 
                     <View style={styles.stat}>
                         <Text style={styles.statNumber}>
-                            299
+                            {quantidadeSeguindo}
                         </Text>
 
                         <Text style={styles.statLabel}>
@@ -278,4 +316,4 @@ export default function Perfil({ navigation }) {
             </ScrollView>
         </SafeAreaView>
     )
-} 
+}

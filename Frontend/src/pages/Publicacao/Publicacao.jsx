@@ -6,6 +6,7 @@ import {
     Pressable,
     TextInput,
     KeyboardAvoidingView,
+    Keyboard,
     Platform,
     ScrollView,
 } from "react-native"
@@ -17,10 +18,12 @@ import { useUsuario } from "../../contexts/UsuarioContext"
 export default function Publicacao({
     publicacao,
     onVoltar = () => {},
+    onAbrirPerfil = () => {},
 }) {
     const {
         curtidas,
         salvos,
+        comentariosPorPublicacao,
         alternarCurtida,
         alternarSalvo,
         adicionarComentario,
@@ -43,8 +46,19 @@ export default function Publicacao({
     const quantidadeComentarios =
         obterQuantidadeComentarios(publicacao)
 
-    const comentariosCadastrados =
-        publicacao.comentariosCadastrados || []
+    const comentariosCadastrados = [
+        ...(comentariosPorPublicacao[
+            String(publicacao.id)
+        ] || []),
+    ].reverse()
+
+    const abrirPerfilDoUsuario = () => {
+        onAbrirPerfil({
+            usuarioId: publicacao.usuarioId || null,
+            nome: publicacao.nome || "Usuário",
+            avatar: publicacao.avatar || null,
+        })
+    }
 
     const formatarHora = data => {
         if (!data) {
@@ -141,12 +155,13 @@ export default function Publicacao({
             return
         }
 
+        setComentario("")
+        Keyboard.dismiss()
+
         adicionarComentario(
             publicacao.id,
             textoComentario
         )
-
-        setComentario("")
     }
 
     const localizacao = formatarLocalizacao(
@@ -192,7 +207,10 @@ export default function Publicacao({
                 >
                     <View style={styles.card}>
                         <View style={styles.cardTopo}>
-                            <View style={styles.avatarContainer}>
+                            <Pressable
+                                style={styles.avatarContainer}
+                                onPress={abrirPerfilDoUsuario}
+                            >
                                 {publicacao.avatar ? (
                                     <Image
                                         source={
@@ -219,13 +237,18 @@ export default function Publicacao({
                                         />
                                     </View>
                                 )}
-                            </View>
+                            </Pressable>
 
                             <View style={styles.infoUsuario}>
-                                <Text style={styles.nome}>
-                                    {publicacao.nome ||
-                                        "Usuário"}
-                                </Text>
+                                <Pressable
+                                    onPress={abrirPerfilDoUsuario}
+                                    hitSlop={6}
+                                >
+                                    <Text style={styles.nome}>
+                                        {publicacao.nome ||
+                                            "Usuário"}
+                                    </Text>
+                                </Pressable>
 
                                 <Text style={styles.data}>
                                     {formatarHora(

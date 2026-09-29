@@ -32,13 +32,103 @@ export default StyleSheet.create({
         fontFamily: "BodoniModa_700Bold",
     },
 
+    acoesHeader: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+    },
+
     botaoSino: {
         padding: 4,
+    },
+
+    caixaPesquisa: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginHorizontal: 14,
+        marginBottom: 14,
+        paddingHorizontal: 14,
+        height: 46,
+        borderRadius: 14,
+        backgroundColor: cores.branco,
+        shadowColor: "#000",
+        shadowOpacity: 0.06,
+        shadowRadius: 6,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        elevation: 2,
+    },
+
+    inputPesquisa: {
+        flex: 1,
+        marginLeft: 10,
+        fontSize: 15,
+        color: cores.texto,
+        fontFamily: "Inter_400Regular",
     },
 
     lista: {
         paddingHorizontal: 14,
         paddingBottom: 24,
+    },
+
+    listaBusca: {
+        paddingHorizontal: 14,
+        paddingBottom: 24,
+    },
+
+    itemUsuario: {
+        flexDirection: "row",
+        alignItems: "center",
+        backgroundColor: cores.branco,
+        borderRadius: 14,
+        paddingHorizontal: 14,
+        paddingVertical: 12,
+        marginBottom: 10,
+        shadowColor: "#000",
+        shadowOpacity: 0.06,
+        shadowRadius: 6,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        elevation: 2,
+    },
+
+    avatarUsuario: {
+        width: AVATAR_TAM,
+        height: AVATAR_TAM,
+        borderRadius: AVATAR_TAM / 2,
+        backgroundColor: "#DDD",
+        overflow: "hidden",
+    },
+
+    infoBuscaUsuario: {
+        flex: 1,
+        marginLeft: 12,
+    },
+
+    nomeUsuarioBusca: {
+        fontSize: 16,
+        color: cores.vinho,
+        fontFamily: "Inter_600SemiBold",
+    },
+
+    arrobaUsuarioBusca: {
+        fontSize: 12,
+        color: cores.cinza,
+        marginTop: 2,
+        fontFamily: "Inter_400Regular",
+    },
+
+    buscaVazia: {
+        marginTop: 30,
+        textAlign: "center",
+        fontSize: 14,
+        color: cores.cinza,
+        fontFamily: "Inter_400Regular",
     },
 
     card: {

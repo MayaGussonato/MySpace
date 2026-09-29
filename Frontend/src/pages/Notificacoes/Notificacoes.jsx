@@ -1,125 +1,83 @@
-import {
-    View,
-    Text,
-    ScrollView,
-    SafeAreaView,
-} from "react-native"
+    import { useEffect } from "react"
 
-import { Ionicons } from "@expo/vector-icons"
+    import {
+        View,
+        Text,
+        ScrollView,
+        SafeAreaView,
+    } from "react-native"
 
-import styles from "./NotificacoesStyle"
+    import { Ionicons } from "@expo/vector-icons"
 
-import { useUsuario } from "../../contexts/UsuarioContext"
+    import styles from "./NotificacoesStyle"
 
-export default function Notificacoes() {
-    const { notificacoes } = useUsuario()
+    import { useUsuario } from "../../contexts/UsuarioContext"
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.titulo}>
-                    Notificações
-                </Text>
-            </View>
+    const ICONES = {
+        seguir: "person-add-outline",
+        curtida: "heart-outline",
+        comentario: "chatbubble-outline",
+        salvo: "bookmark-outline",
+        publicacao: "paper-plane",
+    }
 
-            <ScrollView
-                style={styles.scroll}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={
-                    styles.lista
-                }
-            >
-                {notificacoes.map(
-                    notificacao => {
-                        let icone =
-                            "person-add-outline"
+    export default function Notificacoes() {
+        const { notificacoes, carregarNotificacoes } = useUsuario()
 
-                        if (
-                            notificacao.tipo ===
-                            "curtida"
-                        ) {
-                            icone =
-                                "heart-outline"
-                        }
+        useEffect(() => {
+            carregarNotificacoes()
+        }, [])
 
-                        if (
-                            notificacao.tipo ===
-                            "comentario"
-                        ) {
-                            icone =
-                                "chatbubble-outline"
-                        }
+        return (
+            <SafeAreaView style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.titulo}>
+                        Notificações
+                    </Text>
+                </View>
 
-                        if (
-                            notificacao.tipo ===
-                            "publicacao"
-                        ) {
-                            icone =
-                                "paper-plane"
-                        }
+                <ScrollView
+                    style={styles.scroll}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={styles.lista}
+                >
+                    {notificacoes.length === 0 && (
+                        <Text style={styles.data}>
+                            Você ainda não tem notificações.
+                        </Text>
+                    )}
 
-                        return (
-                            <View
-                                key={
-                                    notificacao.id
-                                }
-                                style={
-                                    styles.card
-                                }
-                            >
-                                <View
-                                    style={
-                                        styles.icone
+                    {notificacoes.map(notificacao => (
+                        <View
+                            key={notificacao.id}
+                            style={styles.card}
+                        >
+                            <View style={styles.icone}>
+                                <Ionicons
+                                    name={
+                                        ICONES[notificacao.tipo] ||
+                                        "notifications-outline"
                                     }
-                                >
-                                    <Ionicons
-                                        name={
-                                            icone
-                                        }
-                                        size={40}
-                                        color="#460303"
-                                    />
-                                </View>
-
-                                <View
-                                    style={
-                                        styles.conteudo
-                                    }
-                                >
-                                    <Text
-                                        style={
-                                            styles.texto
-                                        }
-                                    >
-                                        <Text
-                                            style={
-                                                styles.nome
-                                            }
-                                        >
-                                            {
-                                                notificacao.nome
-                                            }
-                                        </Text>{" "}
-                                        {
-                                            notificacao.texto
-                                        }
-                                    </Text>
-
-                                    <Text
-                                        style={
-                                            styles.data
-                                        }
-                                    >
-                                        {
-                                            notificacao.data
-                                        }
-                                    </Text>
-                                </View>
+                                    size={40}
+                                    color="#460303"
+                                />
                             </View>
-                        )
-                    }
-                )}
-            </ScrollView>
-        </SafeAreaView>
-    )
-}
+
+                            <View style={styles.conteudo}>
+                                <Text style={styles.texto}>
+                                    <Text style={styles.nome}>
+                                        {notificacao.nome}
+                                    </Text>{" "}
+                                    {notificacao.texto}
+                                </Text>
+
+                                <Text style={styles.data}>
+                                    {notificacao.data}
+                                </Text>
+                            </View>
+                        </View>
+                    ))}
+                </ScrollView>
+            </SafeAreaView>
+        )
+    }
